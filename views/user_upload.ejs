@@ -1,0 +1,77 @@
+<% const capitalTitle = title.charAt(0).toUpperCase() + title.slice(1); let renameTitle = ''; switch(capitalTitle){case 'Manual': renameTitle = "Training Manual"; break; case 'E_sales': renameTitle = "E-Sales Aid"; break; default: renameTitle = capitalTitle}; %>
+
+<!-- * HEAD * -->
+<%- include('includes/user_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <header id="header">
+    <div class="container_header">
+      <div class="main_header">
+        <div class="title_box">
+          <span class="subtitle">Jenphar E-Library</span>
+          <% if(title == 'manual' && id == 53) { %>
+            <h1 class="title">Hematology</h1>
+          <% } else if(title == 'journal' && id == 53) { %>
+            <h1 class="title">Oncology</h1>
+          <% } else if(title == 'video' && id == 53) { %>
+            <h1 class="title">Virology</h1>
+          <% } else { %>
+            <h1 class="title"><%= renameTitle %></h1>
+          <% } %>
+        </div>
+        <div class="image_box">
+          <img class="image" src="/images/dummy-profile.png" alt="Picture of the user" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="fixed_container">
+      <section id="media">
+        <%for(let i=0;i<data.length;i++){%>
+          <%if(data[i].file_type === 'pdf'){%>
+            <div class="content_box">
+              <h2 class="title">File</h2>
+              <div class='media_pdf'>
+                <a href="/e-library/upload/<%=data[i].file%>">
+                  <img class="icon" src="/images/pdf-icon.png" alt="PDF icon">
+                  <h3 class="name"><%=data[i].file%></h3>
+                  <span class="button">Click to View</span>
+                  </a>
+              </div>
+            </div>
+          <%}%>
+
+          <%if(data[i].file_type === 'img'){%>
+            <div class="content_box">
+              <h2 class="title">Image</h2>
+              <div class="media_image">
+                <img class="image" src="/uploads/<%=data[i].file%>" alt="Photo of Jenphar E-Library" />
+              </div>
+            </div>
+          <%}%>
+
+          <%if(data[i].file_type === 'video'){%>
+            <div class="content_box">
+              <h2 class="title">Video</h2>
+              <video class="media_video" width="100%" height="auto" controls controlsList="nodownload">
+                  <source src="/uploads/<%=data[i].file%>" type="video/mp4">
+                  Your browser does not support the video tag.
+              </video>
+            </div>
+          <%}%>
+      <%}%>
+      </section>
+    </div>
+  </main>
+
+  <!-- * FOOTER * -->
+  <%- include('includes/user_layout/footer.ejs') %>
+  <!-- * FOOTER * -->
+</body>
+
+<!-- * FOOT * -->
+<%- include('includes/user_layout/foot.ejs') %>
+<!-- * FOOT * -->

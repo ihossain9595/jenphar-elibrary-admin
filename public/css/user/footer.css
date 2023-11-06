@@ -1,0 +1,40 @@
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 15;
+  background-color: var(--blue-secondary);
+}
+
+#footer .container {
+  max-width: 68rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+#footer .content_box {
+  padding: 1.6rem 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#footer .home_box .icon {
+  font-size: 3.5rem;
+  color: var(--white);
+  transition: 0.2s;
+}
+#footer .home_box .icon:hover {
+  color: var(--white-hover);
+}
+
+#footer .arrow_box .icon {
+  font-size: 3rem;
+  color: var(--white);
+  cursor: pointer;
+  transition: 0.2s;
+}
+#footer .arrow_box .icon:hover {
+  color: var(--white-hover);
+}

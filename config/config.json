@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "root",
+    "password": "radiant@123",
+    "database": "jenphar_hub",
+    "host": "116.68.200.97",
+    "port": "60906",
+    "dialect": "mysql",
+    "timezone": "Asia/Dhaka"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "radiant@123",
+    "database": "jenphar_hub",
+    "host": "116.68.200.97",
+    "port": "60906",
+    "dialect": "mysql",
+    "timezone": "Asia/Dhaka"
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+
+  <body>
+    <main id="home">
+      <div class="container">
+        <!-- 1 -->
+        <div class="logo_box">
+          <img class="logo" src="/images/jenphar_elibrary_logo.png" alt="Logo of Jenphar E-Library" />
+        </div>
+
+        <!-- 2 -->
+        <div class="welcome_box">
+          <span class="subtitle">Admin Login</span>
+          <h1 class="title">Jenphar E-Library</h1>
+        </div>
+
+        <% if (messages.error) { %>
+        <div id="error_box">Error! <%- messages.error %></div>
+        <% } %> <% if (messages.success) { %>
+        <div id="error_box">Success! <%- messages.success %></div>
+        <% } %>
+
+        <!-- 3 -->
+        <form class="form_box" action="/login" method="post">
+          <input class="input" name="username" type="text" id="username" placeholder="Username" />
+          <input class="input" name="password" type="password" id="password" placeholder="Password" />
+          <button class="btn_login" type="submit">Login</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

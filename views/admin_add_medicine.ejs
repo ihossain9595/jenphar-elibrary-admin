@@ -1,0 +1,59 @@
+<!-- * HEAD * -->
+<%- include('includes/admin_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * NAVBAR - START * -->
+  <%- include('includes/admin_layout/navbar_start.ejs') %>
+  <!-- * NAVBAR - START * -->
+
+  <!-- ! MAIN ! -->
+  <section class="main_box">
+    <div class="content_box">
+      <h1 class="title"><%= title %></h1>
+      <form id="addmedicine" class="form" action="/admin/add-medicine/upload" method="POST" enctype="multipart/form-data">
+        <div>
+          <% if (messages.error) { %>
+          <div id="error_box">Error! <%- messages.error %></div>
+          <% } %> <% if (messages.success) { %>
+          <div id="error_box">Success! <%- messages.success %></div>
+          <% } %>
+        </div>
+
+        <!-- Medicine Name -->
+        <label class="myLabel" for="medicine_name">
+          Medicine Name:
+          <input class="myInput" name="medicine_name" type="text" id="medicine_name" placeholder="Medicine Name" />
+        </label>
+
+        <!-- Category -->
+        <label class="myLabel" for="category">
+          Category:
+          <select class="myInput" id="category" name="category" placeholder="Category">
+            <option value="Hematology">Hematology</option>
+            <option value="Oncology">Oncology</option>
+            <option value="Virology">Virology</option>
+          </select>
+        </label>
+
+        <!-- Brand Logo -->
+        <label class="myLabel" for="brand_logo">
+          Brand Logo:
+          <input type="file" name="brand_logo" id="brand_logo" />
+        </label>
+
+        <!-- Upload -->
+        <button class="button" type="submit">Upload</button>
+      </form>
+    </div>
+  </section>
+  <!-- ! MAIN ! -->
+
+  <!-- * NAVBAR - END * -->
+  <%- include('includes/admin_layout/navbar_end.ejs') %>
+  <!-- * NAVBAR - END * -->
+</body>
+
+<!-- * FOOT * -->
+<%- include('includes/admin_layout/foot.ejs') %>
+<!-- * FOOT * -->

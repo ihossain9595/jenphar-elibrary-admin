@@ -1,0 +1,47 @@
+<!-- * HEAD * -->
+<%- include('../includes/user_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * HEADER * -->
+  <%- include('../includes/user_layout/header.ejs') %>
+  <!-- * HEADER * -->
+
+  <main id="main">
+    <div class="fixed_container">
+      <section id="select">
+        <%for(let i=0;i<data.length;i++){%>
+          <div id="quiz_box">
+            <div class="title_box">
+              <span class="subtitle">Topic</span>
+              <h2 class="title"><%=data[i].name%></h2>
+            </div>
+
+            <div class="content_boxes">
+              <div class="content_box"><span class="title">Exam Duration</span>
+                <p class="content"><%=data[i].time_duration%> Minutes</p></div>
+                <div class="content_box"><span class="title">Exam Start</span>
+                  <p class="content"><%=data[i].start_time.toLocaleDateString()%> - <%=data[i].start_time.toLocaleTimeString()%></p></div>
+                  <div class="content_box"><span class="title">Exam End</span>
+                    <p class="content"><%=data[i].end_time.toLocaleDateString()%> - <%=data[i].end_time.toLocaleTimeString()%></p></div>
+                  </div>
+                  <a href="/quizes/quiz/<%= data[i].id %>" class="button_box"><span class="button">Start Exam</span></a>
+          </div>
+        <%}%>
+      </section>
+    </div>
+  </main>
+
+  <!-- * FOOTER * -->
+  <%- include('../includes/user_layout/footer.ejs') %>
+  <!-- * FOOTER * -->
+</body>
+
+<!-- * FOOT * -->
+<%- include('../includes/user_layout/foot.ejs') %>
+<!-- * FOOT * -->
+
+
+<script>
+
+</script>

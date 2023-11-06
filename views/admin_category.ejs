@@ -1,0 +1,40 @@
+<!-- * HEAD * -->
+<%- include('includes/admin_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * NAVBAR - START * -->
+  <%- include('includes/admin_layout/navbar_start.ejs') %>
+  <!-- * NAVBAR - START * -->
+  
+  <!-- ! MAIN ! -->
+  <section class='main_box'>
+    <div class='content_box'>
+        <h1 class='title'><%= title %></h1>
+        <div id='info_boxes'>
+            <%for(let i=0;i<data.length;i++){%>
+                <a class='med_info_box' href="/admin/e-library/option?id=<%=data[i].id%>&medicine_name=<%=data[i].medicine_name%>">
+                    <div class='image_box'>
+                        <% if(data[i].brand_logo === null) { %>
+                            <img class="image" src='/images/medicines/<%=data[i].medicine_name%>.png' alt="Medicine logo 2  ">
+                        <% } else { %>
+                            <img class="image" src='/images/medicines/<%=data[i].brand_logo%>' alt="Medicine logo 1">
+                        <% } %>
+                    </div>
+                    <p class='name'><%=data[i].medicine_name%></p>
+                </a>
+            <%}%>
+        </div>
+    </div>
+  </section>
+  <!-- ! MAIN ! -->
+
+  <!-- * NAVBAR - END * -->
+  <%- include('includes/admin_layout/navbar_end.ejs') %>
+  <!-- * NAVBAR - END * -->
+</body>
+
+<!-- * FOOT * -->
+<%- include('includes/admin_layout/foot.ejs') %>
+<!-- * FOOT * -->
+

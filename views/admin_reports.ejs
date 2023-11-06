@@ -1,0 +1,47 @@
+<!-- * HEAD * -->
+<%- include('includes/admin_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * NAVBAR - START * -->
+  <%- include('includes/admin_layout/navbar_start.ejs') %>
+  <!-- * NAVBAR - START * -->
+
+  <section class="main_box">
+    <div class="content_box">
+      <h1 class="title"><%= title %></h1>
+
+      <div id="download">
+        <form id="download_report" action="/admin/download/reports" method="POST">
+          <div class="download_box input-daterange input-group" id="datepicker">
+            <label class="myLabel" for="start">
+              Start Date:
+              <input type="text" class="myInput input-sm form-control" name="dateStart" id="start" placeholder="Start" />
+            </label>
+            <label class="myLabel" for="end">
+              End Date:
+              <input type="text" class="myInput input-sm form-control" name="dateEnd" id="end" placeholder="End" />
+            </label>
+          </div>
+          <button class="button button-save" type="submit">Download</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- * NAVBAR - END * -->
+  <%- include('includes/admin_layout/navbar_end.ejs') %>
+  <!-- * NAVBAR - END * -->
+
+  <script>
+    $(document).ready(function () {
+      $("#datepicker").datepicker({
+        format: "dd-mm-yyyy",
+      });
+    });
+  </script>
+</body>
+
+<!-- * FOOT * -->
+<%- include('includes/admin_layout/foot.ejs') %>
+<!-- * FOOT * -->

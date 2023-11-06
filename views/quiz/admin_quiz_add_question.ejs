@@ -1,0 +1,88 @@
+<!-- * HEAD * -->
+<%- include('../includes/admin_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * NAVBAR - START * -->
+  <%- include('../includes/admin_layout/navbar_start.ejs') %>
+  <!-- * NAVBAR - START * -->
+
+  <!-- ! MAIN ! -->
+  <section class="main_box">
+    <div class="content_box">
+      <div id="intro_box">
+        <div class="left_box">
+          <p class="sub_title">Quiz</p>
+          <h1 class="title">Add New Question</h1>
+        </div>
+        <div class="right_box">
+          <a class="button_add" href="/admin/quiz/question-list/<%= id %>">Question List</a>
+        </div>
+      </div>
+
+      <hr class="line" />
+
+      <!-- ERROR -->
+      <div id="error_half">
+        <% if (messages.error) { %>
+        <div class="message_error">Error! <%- messages.error %></div>
+        <% } %> <% if (messages.success) { %>
+        <div class="message_success">Success! <%- messages.success %></div>
+        <% } %>
+      </div>
+      <!-- ERROR -->
+
+      <main id="quiz_add_question">
+        <!-- FORM -->
+        <form id="form" class="form" action="/admin/quiz/add-question/<%= id %>" method="POST">
+          <label class="label" for="question">
+            Question
+            <input class="input_text" id="question" name="question" type="text" placeholder="Input quiz question" required />
+          </label>
+
+          <div class="quiz_option_box">
+            <label class="label" for="option_1">
+              Option 1
+              <input class="input_text" id="option_1" name="option_1" type="text" placeholder="Input option 1" required />
+            </label>
+            <label class="label" for="option_2">
+              Option 2
+              <input class="input_text" id="option_2" name="option_2" type="text" placeholder="Input option 2" required />
+            </label>
+            <label class="label" for="option_3">
+              Option 3
+              <input class="input_text" id="option_3" name="option_3" type="text" placeholder="Input option 3" />
+            </label>
+            <label class="label" for="option_4">
+              Option 4
+              <input class="input_text" id="option_4" name="option_4" type="text" placeholder="Input option 4" />
+            </label>
+          </div>
+
+          <label class="label" for="answer">
+            Answer
+            <select class="input_select" id="answer" name="answer" required>
+              <option value="op_0" selected>Select answer</option>
+              <option value="op_1">Option 1</option>
+              <option value="op_2">Option 2</option>
+              <option value="op_3">Option 3</option>
+              <option value="op_4">Option 4</option>
+            </select>
+          </label>
+
+          <button class="button_submit" type="submit">Submit</button>
+        </form>
+        <!-- FORM -->
+      </main>
+    </div>
+  </section>
+  <!-- ! MAIN ! -->
+
+  <!-- * NAVBAR - END * -->
+  <%- include('../includes/admin_layout/navbar_end.ejs') %>
+  <!-- * NAVBAR - END * -->
+</body>
+
+<!-- * FOOT * -->
+<%- include('../includes/admin_layout/foot.ejs') %>
+<!-- * FOOT * -->

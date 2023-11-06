@@ -1,0 +1,108 @@
+<!-- * HEAD * -->
+<%- include('../includes/admin_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * NAVBAR - START * -->
+  <%- include('../includes/admin_layout/navbar_start.ejs') %>
+  <!-- * NAVBAR - START * -->
+
+  <!-- ! MAIN ! -->
+  <section class="main_box">
+    <div class="content_box">
+      <p class="sub_title">Quiz</p>
+      <h1 class="title" style="margin-bottom: 2.4rem"><%=title%></h1>
+
+      <hr class="line" />
+
+      <!-- ERROR -->
+      <div id="error_half">
+        <% if (messages.error) { %>
+        <div class="message_error">Error! <%- messages.error %></div>
+        <% } %> <% if (messages.success) { %>
+        <div class="message_success">Success! <%- messages.success %></div>
+        <% } %>
+      </div>
+      <!-- ERROR -->
+
+      <main id="quiz_add">
+        <!-- FORM -->
+        <form id="form" class="form" action="/admin/quiz/quiz-list/edit/<%= id %>" method="POST">
+          <input type="hidden" name="id" value="<%= id %>" />
+
+          <label class="label" for="name">
+            Name
+            <input class="input_text" id="name" name="name" type="text" value="<%= name %>" placeholder="Input quiz name" required />
+          </label>
+
+          <label class="label" for="time_duration">
+            Time
+            <input class="input_number" id="time_duration" name="time_duration" value="<%= time_duration %>" type="number" placeholder="Input quiz time duration" required />
+          </label>
+
+          <label class="label" for="category">
+            Category
+            <select class="input_select" id="category" name="category" placeholder="Select quiz category" required>
+              <option value="" <%= category === "" ? 'selected' : "" %>>Select quiz category</option>
+              <option value="Hematology" <%= category === "Hematology" ? 'selected' : "" %>>Hematology</option>
+              <option value="Oncology" <%= category === "Oncology" ? 'selected' : "" %>>Oncology</option>
+              <option value="Virology" <%= category === "Virology" ? 'selected' : "" %>>Virology</option>
+              <option value="Combined" <%= category === "Combined" ? 'selected' : "" %>>Combined</option>
+            </select>
+          </label>
+
+          <div class="time_box">
+            <label class="label" for="start_time">
+              Quiz Start
+              <input class="input_select" id="start_time" name="start_time"  type="datetime-local" required />
+            </label>
+
+            <label class="label" for="end_time">
+              Quiz End
+              <input class="input_select" id="end_time" name="end_time" value="<%= end_time %>" type="datetime-local" required />
+            </label>
+          </div>
+
+          <label class="label" for="status">
+            Status
+            <select class="input_select" id="status" name="status" placeholder="Select quiz status" required>
+              <option value="Published" <%= status == 'Published' ? 'selected' : "" %>>Published</option>
+              <option value="Unpublished" <%= status == 'Unpublished' ? 'selected' : "" %>>Unpublished</option>
+            </select>
+          </label>
+
+          <button class="button_submit" type="submit">Submit</button>
+        </form>
+        <!-- FORM -->
+      </main>
+    </div>
+  </section>
+  <!-- ! MAIN ! -->
+
+  <!-- * NAVBAR - END * -->
+  <%- include('../includes/admin_layout/navbar_end.ejs') %>
+  <!-- * NAVBAR - END * -->
+
+  <script>
+    var start_time = '<%= start_time %>';
+    var end_time = '<%= end_time %>';
+
+    var startDate = new Date(start_time);
+    var endDate = new Date(end_time);
+
+    var gmtOffset = 360;
+
+    startDate.setMinutes(startDate.getMinutes() + gmtOffset);
+    endDate.setMinutes(endDate.getMinutes() + gmtOffset);
+
+    var formattedStartDate = startDate.toISOString().slice(0, 16);
+    var formattedEndDate = endDate.toISOString().slice(0, 16);
+
+    document.getElementById('start_time').value = formattedStartDate;
+    document.getElementById('end_time').value = formattedEndDate;
+    </script>
+</body>
+
+<!-- * FOOT * -->
+<%- include('../includes/admin_layout/foot.ejs') %>
+<!-- * FOOT * -->

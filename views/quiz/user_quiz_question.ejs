@@ -1,0 +1,170 @@
+<!-- * HEAD * -->
+<%- include('../includes/user_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * HEADER * -->
+  <%- include('../includes/user_layout/header.ejs') %>
+  <!-- * HEADER * -->
+
+  <main id="main">
+    <div class="fixed_container">
+      <section id="select">
+
+        <div id="time_box">
+          <div id="countdown_timers" class="remain"></div>
+        </div>
+
+          <input type="hidden" id="data_length" value="<%=data.length%>">
+          <input type="hidden" id="time_duration" value="<%=data[0].time_duration%>">
+
+          <%let sl = 0;%>
+          <%for(let i=0;i<data.length;i++){%>
+            <div class="question_box" id="q_<%=sl%>" style="display: none">
+                <input type="hidden" id="question_id_<%=sl%>" value="<%=data[i].id%>">
+              <div class="title_box">
+                <span class="subtitle">Question <%= i+1 %></span>
+                <h2 class="title"><%=data[i].question%></h2>
+              </div>
+
+              <div class="option_boxes">
+                <% if(data[i].option_1) { %>
+                <label class="option_box" for="option1_<%=sl%>"><%=data[i].option_1%>
+                  <input type="radio" id="option1_<%=sl%>" name="option_<%=sl%>" value="1">
+                </label>
+                <% } %>
+                <% if(data[i].option_2) { %>
+                <label class="option_box" for="option2_<%=sl%>"><%=data[i].option_2%>
+                  <input type="radio" id="option2_<%=sl%>" name="option_<%=sl%>"  value="2">
+                </label>
+                <% } %>
+                <% if(data[i].option_3) { %>
+                  <label class="option_box" for="option3_<%=sl%>"><%=data[i].option_3%>
+                    <input type="radio" id="option3_<%=sl%>" name="option_<%=sl%>"  value="3">
+                  </label>
+                <% } %>
+                <% if(data[i].option_4) { %>
+                  <label class="option_box" for="option4_<%=sl%>"><%=data[i].option_4%>
+                    <input type="radio" id="option4_<%=sl%>" name="option_<%=sl%>" value="4">
+                  </label>
+                <% } %>
+
+              </div>
+            </div>
+            <%sl++%>
+          <%}%>
+
+          <button id="button_next" type="button" style="display: none">Next</button>
+          <button id="button_complete" type="button" style="display: none">Complete</button>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- * FOOTER * -->
+  <%- include('../includes/user_layout/footer.ejs') %>
+  <!-- * FOOTER * -->
+</body>
+
+<!-- * FOOT * -->
+<%- include('../includes/user_layout/foot.ejs') %>
+<!-- * FOOT * -->
+
+
+<script>
+    var time_duration = $("#time_duration").val();
+    var totalTime = Number(time_duration) * 60;
+
+    function updateTimer() {
+        var minutes = Math.floor(totalTime / 60);
+        var seconds = totalTime % 60;
+        var minutesStr = minutes < 10 ? '0' + minutes : minutes;
+        var secondsStr = seconds < 10 ? '0' + seconds : seconds;
+
+        $("#countdown_timers").text(minutesStr + ':' + secondsStr)
+        totalTime--;
+        if (totalTime < 0) {
+            clearInterval(timerInterval);
+            window.location.href = "/thank_you";
+        }
+    }
+
+    updateTimer();
+    var timerInterval = setInterval(updateTimer, 1000);
+
+    var data_length = $("#data_length").val();
+    $("#q_0").show();
+    $("#button_next").show();
+    var current_position = 0;
+    $("#button_next").click(function(){
+        next_save_answer();
+    });
+    $("#button_complete").click(function(){
+        save_complete();
+    });
+
+    function next_save_answer(){
+        const option_check = $(`input[name="option_${current_position}"]:checked`).val();
+        const question_id = $(`#question_id_${current_position}`).val();
+        const data = {
+            quiz_id: question_id,
+            answer: option_check,
+        }
+        $.ajax({
+            type: "POST",
+            url: "/quizes/quiz/save_quiz",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            dataType: "json",
+            success: function (data, status, jqXHR) {
+                if(data_length>current_position+2){
+                    $("#q_"+current_position).hide();
+                    current_position++;
+                    $("#q_"+current_position).show();
+                }else{
+                    $("#q_"+current_position).hide();
+                    current_position++;
+                    $("#q_"+current_position).show();
+                    $("#button_next").hide();
+                    $("#button_complete").show();
+                }
+
+            },
+
+            error: function (jqXHR, status) {
+                // error handler
+                console.log(jqXHR);
+                alert('fail' + status.code);
+            }
+        });
+    }
+
+    function save_complete(){
+        const option_check = $(`input[name="option_${current_position}"]:checked`).val();
+        const question_id = $(`#question_id_${current_position}`).val();
+        const data = {
+            quiz_id: question_id,
+            answer: option_check,
+        }
+        $.ajax({
+            type: "POST",
+            url: "/quizes/quiz/save_quiz",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            dataType: "json",
+            success: function (data, status, jqXHR) {
+                window.location.href = "/thank_you";
+            },
+
+            error: function (jqXHR, status) {
+                // error handler
+                console.log(jqXHR);
+                alert('fail' + status.code);
+            }
+        });
+    }
+
+
+</script>

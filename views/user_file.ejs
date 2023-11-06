@@ -1,0 +1,72 @@
+<!-- * HEAD * -->
+<%- include('includes/user_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * HEADER * -->
+  <%- include('includes/user_layout/header.ejs') %>
+  <!-- * HEADER * -->
+
+  <main id="main">
+    <div class="fixed_container">
+      <section id="file">
+        <input id="fileURL" type="hidden" name="fileURL" value="<%=file_url%>" />
+        <div id="outputImages"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- * FOOTER * -->
+  <%- include('includes/user_layout/footer.ejs') %>
+  <!-- * FOOTER * -->
+</body>
+
+<!-- * FOOT * -->
+<%- include('includes/user_layout/foot.ejs') %>
+<!-- * FOOT * -->
+
+<script>
+  convertPDFToImage();
+
+  async function convertPDFToImage() {
+    const myFileURL = document.getElementById("fileURL");
+    const outputImagesDiv = document.getElementById("outputImages");
+    outputImagesDiv.innerHTML = "";
+
+    const file = `/uploads/${myFileURL.value}`;
+    console.log("FILE", file);
+
+    if (!file) {
+      return;
+    }
+
+    const fileReader = async function (file) {
+      const pdf = await pdfjsLib.getDocument(file).promise;
+      console.log("PDF", pdf);
+      const totalPages = pdf.numPages;
+
+      for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+        const page = await pdf.getPage(pageNumber);
+        const viewport = page.getViewport({ scale: 1.0 });
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport,
+        };
+
+        await page.render(renderContext).promise;
+        const imageURI = canvas.toDataURL();
+
+        const imageElement = document.createElement("img");
+        imageElement.src = imageURI;
+        outputImagesDiv.appendChild(imageElement);
+      }
+    };
+
+    fileReader(file);
+  }
+</script>

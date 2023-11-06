@@ -1,0 +1,58 @@
+<!-- * HEAD * -->
+<%- include('includes/admin_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * NAVBAR - START * -->
+  <%- include('includes/admin_layout/navbar_start.ejs') %>
+  <!-- * NAVBAR - START * -->
+
+    <!-- ! MAIN ! -->
+    <section class="main_box">
+        <div class="content_box">
+    
+          <h1 class="title">User Access</h1>
+
+        <% 
+        if(data.can_login === '1') {
+        %>
+            <div class="access access_active">Active</div>
+        <%
+        } else {
+        %>
+        <div class="access access_inactive">Inactive</div>
+        <%
+        } 
+        %>
+
+              <form class="form" action="/admin/user-access/save?id=1" method="post">
+                <label class="label">Select User Access:</label>
+                <div>
+                  <input class="access_yes" type="radio" id="yes" name="user_access" value='1' />
+                  <label class="access_yes" for="yes">Active</label>
+                </div>
+
+                <div>
+                  <input class="access_no" type="radio" id="no" name="user_access" value="0" />
+                  <label class="access_no" for="no">Inactive</label>
+                </div>
+
+                <input  name="id" value="1" hidden/>
+
+                <button class="access_button" type="submit">Save</button>
+              </form>
+          
+
+        </div>
+      </section>
+    <!-- ! MAIN ! -->
+
+  <!-- * NAVBAR - END * -->
+  <%- include('includes/admin_layout/navbar_end.ejs') %>
+  <!-- * NAVBAR - END * -->
+</body>
+
+  <!-- * FOOT * -->
+  <%- include('includes/admin_layout/foot.ejs') %>
+  <!-- * FOOT * -->
+</body>

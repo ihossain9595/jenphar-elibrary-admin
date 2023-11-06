@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* ! SPACING SYSTEM ! */
+/* 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 */
+
+/* ! FONT SIZE SYSTEM ! */
+/* 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
+
+:root {
+  --blue-primary: #1f466b;
+  --blue-primary-5: rgba(31, 70, 107, 0.5);
+  --blue-primary-1: rgba(31, 70, 107, 0.1);
+  --blue-secondary: #0093c9;
+  --blue-secondary-hover: #0076a1;
+  --blue-secondary-5: rgba(0, 147, 201, 0.5);
+  --blue-secondary-1: rgba(0, 147, 201, 0.1);
+  --blue-secondary-05: rgba(0, 147, 201, 0.05);
+  --black: #000;
+  --black-75: rgba(0, 0, 0, 0.75);
+  --black-5: rgba(0, 0, 0, 0.5);
+  --black-25: rgba(0, 0, 0, 0.25);
+  --black-1: rgba(0, 0, 0, 0.1);
+  --black-1-hover: rgba(0, 0, 0, 0.2);
+  --white: #fff;
+  --white-hover: #e6e6e6;
+  --white-75: rgba(255, 255, 255, 0.75);
+  --white-5: rgba(255, 255, 255, 0.5);
+  --white-25: rgba(255, 255, 255, 0.25);
+  --white-1: rgba(255, 255, 255, 0.1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-black);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.fixed_container {
+  border: 1px solid red;
+
+  width: 100%;
+  max-width: 68rem;
+  padding: 2.4rem;
+  margin-inline: auto;
+}

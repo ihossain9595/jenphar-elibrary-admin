@@ -1,0 +1,218 @@
+<% const capitalTitle = title.charAt(0).toUpperCase() + title.slice(1); let renameTitle = ''; switch(capitalTitle){case 'Manual': renameTitle = "Training Manual"; break; case 'E_sales': renameTitle = "E-Sales Aid"; break; default: renameTitle = capitalTitle}; %>
+
+<!-- * HEAD * -->
+<%- include('includes/admin_layout/head.ejs') %>
+<!-- * HEAD * -->
+
+<body>
+  <!-- * NAVBAR - START * -->
+  <%- include('includes/admin_layout/navbar_start.ejs') %>
+  <!-- * NAVBAR - START * -->
+
+  <!-- ! MAIN ! -->
+  <section class="main_box">
+    <div class="content_box">
+      <p class="sub_title">Medicine</p>
+      
+      <% if(type == 'manual' && brand_id == 53) { %>
+        <h1 class="title">Upload Hematology</h1>
+      <% } else if(type == 'journal' && brand_id == 53) { %>
+        <h1 class="title">Upload Oncology</h1>
+      <% } else if(type == 'video' && brand_id == 53) { %>
+        <h1 class="title">Upload Virology</h1>
+      <% } else { %>
+        <h1 class="title">Upload <%= renameTitle %></h1>
+      <% } %>
+
+      <div id="upload_boxes">
+        <form id="upload_box" action="/admin/upload" method="POST" enctype="multipart/form-data">
+          <input id="q_brand_id"  type="hidden" name="brand_id" value="<%= brand_id %>" />
+          <input id="q_type"  type="hidden" name="type" value="<%= type %>" />
+
+          <label class="upload_label" htmlFor="file_upload">
+            <input class="upload_input" type="file" name="files" id="file_upload" accept="image/*,video/*,.pdf" multiple />
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="upload_icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"></path>
+            </svg>
+            Choose Files
+          </label>
+          <button class="button button-save" type="submit">Save</button>
+        </form>
+
+        <div id="file_container">
+          <h2 class="title">Selected</h2>
+
+          <div id="file_boxes">
+            <div>
+              <% if (messages.error) { %>
+              <div id="error_box">Error! <%- messages.error %></div>
+              <% } %> <% if (messages.success) { %>
+              <div id="error_box">Success! <%- messages.success %></div>
+              <% } %>
+            </div>
+
+            <!-- Content Here -->
+          </div>
+        </div>
+      </div>
+
+      <div id="data_boxes">
+        <h2 class="title">Files</h2>
+
+        <table id="list" class="table datatable-basic table-bordered table-striped table-hover">
+          <thead class="head_title">
+          <tr>
+              <th>File Name</th>
+              <th>Created At</th>
+              <th>Option</th>
+          </tr>
+          </thead>
+
+          <tbody class="body_title">
+            <%for(let i=0;i<data.length;i++){%>
+              <tr>
+                <td><%=data[i].file%></td>
+                <td><%=data[i].created_at.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })%></td>
+                <td>
+                  <a data-delete-id='<%=data[i].id%>' href='javascript:void(0);' id='delete' class='dropdown-item'><i class='icon-trash-alt'></i>Delete</a>
+                  <a data-preview-file='<%=data[i].file%>' data-preview-type='<%=data[i].file_type%>' href='javascript:void(0);' id='preview' class='dropdown-item'><i class='icon-trash-alt'></i>Preview</a>
+                </td>
+              </tr>
+              <%}%>
+          </tbody>
+        </table>
+      </div>
+
+  </section>
+  <!-- ! MAIN ! -->
+
+  <!-- * NAVBAR - END * -->
+  <%- include('includes/admin_layout/navbar_end.ejs') %>
+  <!-- * NAVBAR - END * -->
+</body>
+
+<!-- * FOOT * -->
+<%- include('includes/admin_layout/foot.ejs') %>
+<!-- * FOOT * -->
+
+<script>
+  const fileInput = document.getElementById("file_upload");
+  const fileBoxes = document.getElementById("file_boxes");
+  const qType = document.getElementById("q_type");
+  const qBrandId = document.getElementById("q_brand_id");
+
+
+
+  fileInput.addEventListener("change", (event) => {
+    fileBoxes.innerHTML = "";
+    const files = event.target.files;
+    uploadFiles(files);
+  });
+
+  function uploadFiles(files) {
+    for (let i = 0; i < files.length; i++) {
+      fileBoxes.innerHTML += uploadFile(files[i]);
+    }
+  }
+
+  function uploadFile(file) {
+    var content =
+      "<div class='file_box'>" +
+      "<svg stroke='currentColor' fill='none' stroke-width='2' viewBox='0 0 24 24' aria-hidden='true' class='file_upload' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'><path stroke-linecap='round' stroke-linejoin='round' d='M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z'></path></svg>" +
+      "<div class='name_box'>" +
+      "<span class='name'>" +
+      file.name +
+      "</span>" +
+      "</div>";
+
+    return content;
+  }
+
+  // Custom bootbox dialog with form
+  $("#list").on('click', '#delete', function () {
+            var delid = $(this).attr('data-delete-id');
+            bootbox.confirm({
+                title: 'Delete',
+                message: 'Do you want to delete?',
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-link'
+                    }
+                },
+                callback: function (result) {
+                  console.log(result);
+                    if (result) {
+                        $.ajax({
+                            type: "post",
+                            url: "/file/del",
+                            data: { del_id: delid },
+                            datatype: "json",
+                            traditional: true,
+                            success: function (data) {
+                                if (data.success) {
+                                    window.location.href = `/admin/e-library/upload?type=${qType.value}&brand_id=${qBrandId.value}`;
+                                } else {
+                                    bootbox.alert({
+                                        title: 'Delete Faild!',
+                                        message: data.message
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+  
+  // Custom bootbox dialog with preview
+  $("#list").on('click', '#preview', function () {
+            var file = $(this).attr('data-preview-file');
+            var type = $(this).attr('data-preview-type');
+
+            let myFile;
+
+            console.log(file);
+            console.log(type);
+
+            if (type === "pdf") {
+              myFile = `<div class="myContainer">
+                          <iframe class='myPDF' src=/uploads/${file} />
+                        </div>`;
+            } else if(type === "img") {
+              myFile = `<img class='myImage' src=/uploads/${file} alt=Image>`
+            } else if(type === "video") {
+              myFile = `<video class='myVideo' controls>
+                          <source src=/uploads/${file} type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>`
+            }
+
+            bootbox.confirm({
+                title: 'Preview',
+                message: myFile,
+                buttons: {
+                    confirm: {
+                        label: 'Close',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: '&nbsp;',
+                        className: 'btn-link'
+                    }
+                },
+                callback: function (result) {
+                  if (result) {
+                    console.log("HELLO WORLD");
+                    }
+                }
+            });
+        });
+
+        
+</script>
