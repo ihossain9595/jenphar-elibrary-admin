@@ -1,3 +1,108 @@
+#content_box {
+  padding: 1.2rem;
+  background-color: var(--blue-primary);
+  
+  .main_box {
+    height: calc(100vh - 2.4rem);
+    overflow: hidden;
+    overflow-y: scroll;
+    border-radius: 1.6rem;
+    padding: 3.2rem 2.4rem;
+    background-color: var(--white);
+  }
+}
+
+#title_box_result {
+  .title {
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    color: var(--black);
+  }
+
+  .line {
+    width: 100%;
+    border: 1px solid var(--blue-primary-1);
+    margin: 2.4rem 0;
+   }
+}
+
+#content_box_result {
+  display: flex;
+  justify-content: center;
+  
+  .download_result {
+    width: 50%;
+    border: 1px solid var(--blue-primary-5);
+    padding: 1.6rem;
+    border-radius: 1.6rem;
+
+    .myLabel {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      color: var(--blue-secondary);
+    }
+  
+    .myInput {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--blue-primary-1);
+      border-radius: 0.8rem;
+      padding: 1.2rem;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-top: 0.4rem;
+      background-color: var(--blue-primary-1);
+    }
+  
+    .button_download {
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1;
+      cursor: pointer;
+      border: none;
+      border-radius: 0.8rem;
+      padding: 1.2rem 3.2rem;
+      transition: 0.2s;
+      background-color: var(--blue-secondary);
+      border: 1px solid var(--blue-secondary);
+      color: var(--white);
+  
+      &:hover {
+        background-color: var(--blue-secondary-hover);
+      }
+    }
+  
+  }
+}
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
 .main_box {
   padding: 1.2rem;
   background-color: var(--blue-primary);
@@ -10,27 +115,7 @@
   background-color: var(--white);
 }
 
-/* ! */
 
-.sub_title {
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.2;
-  margin-bottom: 0rem;
-  color: var(--blue-secondary);
-}
-
-.title {
-  font-size: 3.2rem;
-  font-weight: 700;
-  line-height: 1.2;
-  /* margin-bottom: 3.2rem; */
-  color: var(--black);
-}
-
-.line {
-  color: var(--blue-secondary);
-}
 
 /* ! */
 

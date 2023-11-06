@@ -1,0 +1,154 @@
+<% const capitalTitle = title?.charAt(0)?.toUpperCase() + title?.slice(1); let renameTitle = ''; switch(capitalTitle){case 'Manual': renameTitle = "Training Manual"; break; case 'E_sales': renameTitle = "E-Sales Aid"; break; default: renameTitle = capitalTitle}; %>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= renameTitle %> - Jenphar E-Library</title>
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css" />
+    <link href="/assets/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/template_assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/template_assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/template_assets/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/template_assets/css/components.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/template_assets/css/colors.min.css" rel="stylesheet" type="text/css" />
+    <!-- /global stylesheets -->
+
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/admin/layout.css" />
+    <link rel="stylesheet" href="/css/admin/main.css" />
+    <link rel="stylesheet" href="/css/quiz/style.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <!-- Core JS files -->
+    <script src="/assets/global_assets/js/main/jquery.min.js"></script>
+    <script src="/assets/global_assets/js/main/bootstrap.bundle.min.js"></script>
+    <script src="/assets/global_assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+
+    <!-- Theme JS files -->
+    <script src="/assets/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script src="/assets/global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+    <script src="/assets/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+    <script src="/assets/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script src="/assets/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script src="/assets/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script src="/assets/global_assets/js/plugins/pagination/bs_pagination.min.js"></script>
+    <script src="/assets/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script src="/assets/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="/assets/global_assets/js/demo_pages/form_select2.js"></script>
+    <script src="/assets/global_assets/js/plugins/notifications/bootbox.min.js"></script>
+    <script src="/assets/template_assets/js/app.js"></script>
+    <script src="/assets/global_assets/js/demo_pages/dashboard.js"></script>
+    <!-- /theme JS files -->
+    <script src="/assets/global_assets/js/demo_pages/datatables_basic.js"></script>
+
+    <script src="/assets/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script src="/assets/global_assets/js/demo_pages/form_layouts.js"></script>
+    <script src="/assets/global_assets/js/plugins/notifications/bootbox.min.js"></script>
+    <script src="/assets/global_assets/js/demo_pages/components_modals.js"></script>
+    <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
+
+    <script src="/assets/global_assets/js/plugins/pickers/anytime.min.js"></script>
+    <script src="/assets/global_assets/js/demo_pages/picker_date.js"></script>
+
+    <script type="text/javascript" src="/assets/zoom/jquery.ez-plus.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="/assets/jsgrid/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="/assets/jsgrid/jsgrid-theme.min.css" />
+    <script type="text/javascript" src="/assets/jsgrid/jsgrid.min.js"></script>
+  </head>
+
+  <body id="main">
+    <div id="side_box">
+      <aside class="asidebar">
+        <div class="logo_box"><img class="logo" src="/images/jenphar_elibrary_logo.png" alt="Logo of Jenphar Bangladesh" /></div>
+
+        <nav class="nav_box">
+          <ul class="list_box_1">
+            <li>
+              <a class="list_1" href="/admin/dashboard">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="icon_1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <g>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path>
+                  </g>
+                </svg>
+                <span class="link_1"> Dashboard </span>
+              </a>
+            </li>
+
+            <li class="list_1__close">
+              <a class="list_1" href="/admin/e-library">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="icon_1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M64 480H48a32 32 0 01-32-32V112a32 32 0 0132-32h16a32 32 0 0132 32v336a32 32 0 01-32 32zm176-304a32 32 0 00-32-32h-64a32 32 0 00-32 32v28a4 4 0 004 4h120a4 4 0 004-4zM112 448a32 32 0 0032 32h64a32 32 0 0032-32v-30a2 2 0 00-2-2H114a2 2 0 00-2 2z"></path>
+                  <rect width="128" height="144" x="112" y="240" rx="2" ry="2"></rect>
+                  <path d="M320 480h-32a32 32 0 01-32-32V64a32 32 0 0132-32h32a32 32 0 0132 32v384a32 32 0 01-32 32zm175.89-34.55l-32.23-340c-1.48-15.65-16.94-27-34.53-25.31l-31.85 3c-17.59 1.67-30.65 15.71-29.17 31.36l32.23 340c1.48 15.65 16.94 27 34.53 25.31l31.85-3c17.59-1.67 30.65-15.71 29.17-31.36z"></path>
+                </svg>
+                <span class="link_1"> E-Library </span>
+              </a>
+            </li>
+            <ul class="list_box_2">
+              <li>
+                <a class="list_2" href="/admin/e-library/category/?category_name=Hematology">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="icon_2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zM7.83 14c.37 0 .67.26.74.62.41 2.22 2.28 2.98 3.64 2.87.43-.02.79.32.79.75 0 .4-.32.73-.72.75-2.13.13-4.62-1.09-5.19-4.12a.75.75 0 01.74-.87z"></path>
+                  </svg>
+                  <span class="link_2"> Hematology </span>
+                </a>
+              </li>
+              <li>
+                <a class="list_2" href="/admin/e-library/category/?category_name=Oncology">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="icon_2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"></path>
+                  </svg>
+                  <span class="link_2"> Oncology </span>
+                </a>
+              </li>
+              <li>
+                <a class="list_2" href="/admin/e-library/category/?category_name=Virology">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="icon_2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M483.55,227.55H462c-50.68,0-76.07-61.27-40.23-97.11L437,115.19A28.44,28.44,0,0,0,396.8,75L381.56,90.22c-35.84,35.83-97.11,10.45-97.11-40.23V28.44a28.45,28.45,0,0,0-56.9,0V50c0,50.68-61.27,76.06-97.11,40.23L115.2,75A28.44,28.44,0,0,0,75,115.19l15.25,15.25c35.84,35.84,10.45,97.11-40.23,97.11H28.45a28.45,28.45,0,1,0,0,56.89H50c50.68,0,76.07,61.28,40.23,97.12L75,396.8A28.45,28.45,0,0,0,115.2,437l15.24-15.25c35.84-35.84,97.11-10.45,97.11,40.23v21.54a28.45,28.45,0,0,0,56.9,0V462c0-50.68,61.27-76.07,97.11-40.23L396.8,437A28.45,28.45,0,0,0,437,396.8l-15.25-15.24c-35.84-35.84-10.45-97.12,40.23-97.12h21.54a28.45,28.45,0,1,0,0-56.89ZM224,272a48,48,0,1,1,48-48A48,48,0,0,1,224,272Zm80,56a24,24,0,1,1,24-24A24,24,0,0,1,304,328Z"
+                    ></path>
+                  </svg>
+                  <span class="link_2"> Virology </span>
+                </a>
+              </li>
+            </ul>
+
+            <li>
+              <a class="list_1" href="/admin/user-access">
+                <svg class="icon_1" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 640 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"></path>
+                </svg>
+
+                <span class="link_1"> User Access </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="list_1" href="/admin/reports">
+                <svg class="icon_1" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd"></path></svg>
+
+                <span class="link_1"> Reports </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <a class="logout_box" href="/logout-admin">
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span class="link"> Logout </span>
+        </a>
+      </aside>
+    </div>
+    

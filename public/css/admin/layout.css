@@ -1,6 +1,6 @@
 #main {
   background-color: var(--blue-primary);
-  height: 100%;
+  height: 100vh;
   display: grid;
   grid-template-columns: 25rem 1fr;
   
@@ -13,7 +13,7 @@
 }
 
 #side_box .asidebar {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }

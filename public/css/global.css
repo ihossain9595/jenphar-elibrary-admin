@@ -66,8 +66,7 @@ p {
 }
 
 .fixed_container {
-  border: 1px solid red;
-
+  border: 5px solid red;
   width: 100%;
   max-width: 68rem;
   padding: 2.4rem;

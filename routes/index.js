@@ -15,6 +15,7 @@ const AdminUpload = require("../controllers/admin/AdminUpload");
 
 const LoginAccess = require("../controllers/login_access/LoginAccess");
 
+const QuizResult = require("../controllers/quiz/QuizResult");
 const QuizList = require("../controllers/quiz/QuizList");
 const QuestionList = require("../controllers/quiz/QuestionList");
 const QuizCategory = require("../controllers/quiz/QuizCategory");
@@ -64,6 +65,18 @@ router.get("/dashboard", function (req, res) {
   }
 });
 // Dashboard
+//
+//
+//
+// Quiz Result
+router.get("/quiz_result", function (req, res) {
+  if (isAdminLogin(req, res)) {
+    QuizResult.quiz_list(req, res);
+  }
+});
+
+router.post("/download/quiz_result", QuizResult.download);
+// Quiz Result
 //
 //
 //
