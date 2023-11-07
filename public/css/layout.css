@@ -1,0 +1,133 @@
+#main {
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 25rem 1fr;
+  background-color: var(--blue-primary);
+}
+
+#side_box {
+  padding: 3.2rem 1.2rem 3.2rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+
+  .logo_box {
+    padding: 0 0.4rem;
+    margin-bottom: 3.2rem;
+
+    .logo {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      background-color: #fff;
+      padding: 1.2rem 2.4rem;
+      border-radius: 0.8rem;
+    }
+  }
+
+  .nav_box {
+    .list_box_1 {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.4rem;
+      padding-left: 0;
+
+      .list_1 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        column-gap: 1rem;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        padding: 1.6rem 1.2rem;
+        transition: 0.2s;
+        background-color: var(--blue-secondary-1);
+
+        &:hover {
+          background-color: var(--blue-secondary-5);
+        }
+      }
+
+      .link_1 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 1;
+        margin-bottom: 0;
+        color: var(--white-75);
+      }
+
+      .icon_1 {
+        font-size: 1.6rem;
+        color: var(--white-75);
+      }
+    }
+
+    .list_box_2 {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.4rem;
+      display: flex;
+      padding-left: 0;
+
+      .list_2 {
+        display: flex;
+        align-items: center;
+        column-gap: 0.8rem;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        margin-left: 2.4rem;
+        padding: 1.4rem 1.2rem;
+        transition: 0.2s;
+        background-color: var(--blue-secondary-05);
+
+        &:hover {
+          background-color: var(--white-1);
+        }
+      }
+
+      .link_2 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 1;
+        margin-bottom: 0;
+        color: var(--white-75);
+      }
+
+      .icon_2 {
+        font-size: 1.4rem;
+        color: var(--white-75);
+      }
+    }
+  }
+
+  .logout_box {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    padding: 1.6rem 1.2rem;
+    transition: 0.2s;
+    background-color: var(--blue-secondary);
+
+    &:hover {
+      background-color: var(--blue-secondary-hover);
+    }
+
+    .icon {
+      font-size: 1.6rem;
+      color: var(--white-75);
+    }
+
+    .link {
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 0;
+      color: var(--white-75);
+    }
+  }
+}
