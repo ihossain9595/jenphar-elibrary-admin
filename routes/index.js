@@ -80,6 +80,27 @@ router.post("/download/quiz_result", QuizResult.download);
 //
 //
 //
+// Quiz List
+router.get("/quiz-list", function (req, res) {
+  if (isAdminLogin(req, res)) {
+    res.render("quiz/quiz_list", { title: "Quiz List" });
+  }
+});
+// Quiz List
+//
+//
+//
+// Add Quiz
+router.get("/add-quiz", function (req, res) {
+  if (isAdminLogin(req, res)) {
+    res.render("quiz/quiz_add", { title: "Add New Quiz" });
+  }
+});
+router.post("/quiz/add-quiz", QuizList.add_quiz);
+// Add Quiz
+//
+//
+//
 // ! USER
 router.get("/home", async function (req, res) {
   if (await isUserLogin(req, res)) {
@@ -207,11 +228,7 @@ router.post("/admin/user-access/save", async function (req, res, next) {
 // ! USER ACCESS
 
 // ! QUIZ
-router.get("/admin/quiz/quiz-list", function (req, res) {
-  if (isAdminLogin(req, res)) {
-    res.render("quiz/admin_quiz_list", { title: "Quiz List" });
-  }
-});
+
 
 router.post("/admin/quiz-list/data-list", function (req, res, next) {
   if (isAdminLogin(req, res)) {
@@ -246,13 +263,6 @@ router.post("/admin/quiz/question-list/edit/:id", QuizList.edit);
 router.post("/admin/question-list/del", function (req, res, next) {
   QuestionList.delete(req, res, next);
 });
-
-router.get("/admin/quiz/add-quiz", function (req, res) {
-  if (isAdminLogin(req, res)) {
-    res.render("quiz/admin_quiz_add", { title: "Add New Quiz" });
-  }
-});
-router.post("/admin/quiz/add-quiz", QuizList.add_quiz);
 
 // router.get("/admin/quiz/quiz-list/:id", function (req, res) {
 //   if (isAdminLogin(req, res)) {

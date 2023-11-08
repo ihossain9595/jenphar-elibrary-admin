@@ -12,7 +12,7 @@
   }
 }
 
-#title_box_result {
+#title_box_primary {
   .title {
     font-size: 2.6rem;
     font-weight: 700;
@@ -33,10 +33,11 @@
   justify-content: center;
   
   .download_result {
+    background-color: var(--blue-primary-1);
+    border: 1px solid var(--blue-primary-1);
     width: 50%;
-    border: 1px solid var(--blue-primary-5);
     padding: 1.6rem;
-    border-radius: 1.6rem;
+    border-radius: 1.2rem;
 
     .myLabel {
       display: block;
@@ -50,12 +51,13 @@
       width: 100%;
       display: block;
       border: 1px solid var(--blue-primary-1);
+      background-color: var(--white);
       border-radius: 0.8rem;
       padding: 1.2rem;
+      font-family: "Ubuntu", sans-serif;
       font-size: 1.5rem;
       font-weight: 400;
       margin-top: 0.4rem;
-      background-color: var(--blue-primary-1);
     }
   
     .button_download {
@@ -67,10 +69,10 @@
       border: none;
       border-radius: 0.8rem;
       padding: 1.2rem 3.2rem;
-      transition: 0.2s;
       background-color: var(--blue-secondary);
       border: 1px solid var(--blue-secondary);
       color: var(--white);
+      transition: 0.2s;
   
       &:hover {
         background-color: var(--blue-secondary-hover);
@@ -80,7 +82,7 @@
   }
 }
 
-#content_bpx_dashboard {
+#content_box_dashboard {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2.4rem;
