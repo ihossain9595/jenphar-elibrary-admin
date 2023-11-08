@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "radiant@123",
-    "database": "jenphar_hub",
-    "host": "116.68.200.97",
+    "password": "Jenphar@#$123",
+    "database": "jenphar_elibrary",
+    "host": "localhost",
     "port": "60906",
     "dialect": "mysql",
     "timezone": "Asia/Dhaka"
@@ -17,9 +17,9 @@
   },
   "production": {
     "username": "root",
-    "password": "radiant@123",
-    "database": "jenphar_hub",
-    "host": "116.68.200.97",
+    "password": "Jenphar@#$123",
+    "database": "jenphar_elibrary",
+    "host": "localhost",
     "port": "60906",
     "dialect": "mysql",
     "timezone": "Asia/Dhaka"
