@@ -1,19 +1,12 @@
-<!-- * HEAD * -->
-<%- include('../includes/admin_layout/head.ejs') %>
-<!-- * HEAD * -->
+<%- include('../includes/head.ejs') %>
 
-<body>
-  <!-- * NAVBAR - START * -->
-  <%- include('../includes/admin_layout/navbar_start.ejs') %>
-  <!-- * NAVBAR - START * -->
-
-  <!-- ! MAIN ! -->
-  <section class="main_box">
-    <div class="content_box">
-      <p class="sub_title">Quiz</p>
-      <h1 class="title" style="margin-bottom: 2.4rem"><%=title%></h1>
-
-      <hr class="line" />
+  <div id="content_box">
+    <div class="main_box">
+      <!-- Intro -->
+      <div id="title_box_quiz_primary">
+        <h1 class="title"><%= title %></h1>
+        <hr class="line">
+      </div>
 
       <!-- ERROR -->
       <div id="error_half">
@@ -25,9 +18,8 @@
       </div>
       <!-- ERROR -->
 
-      <main id="quiz_add">
-        <!-- FORM -->
-        <form id="form" class="form" action="/admin/quiz/quiz-list/edit/<%= id %>" method="POST">
+      <div id="content_box_quiz_edit">
+        <form id="form" class="edit_quiz" action="/quiz_list/edit/<%= id %>" method="POST">
           <input type="hidden" name="id" value="<%= id %>" />
 
           <label class="label" for="name">
@@ -73,15 +65,9 @@
 
           <button class="button_submit" type="submit">Submit</button>
         </form>
-        <!-- FORM -->
-      </main>
+      </div>
     </div>
-  </section>
-  <!-- ! MAIN ! -->
-
-  <!-- * NAVBAR - END * -->
-  <%- include('../includes/admin_layout/navbar_end.ejs') %>
-  <!-- * NAVBAR - END * -->
+  </div>
 
   <script>
     var start_time = '<%= start_time %>';
@@ -101,8 +87,5 @@
     document.getElementById('start_time').value = formattedStartDate;
     document.getElementById('end_time').value = formattedEndDate;
     </script>
-</body>
 
-<!-- * FOOT * -->
-<%- include('../includes/admin_layout/foot.ejs') %>
-<!-- * FOOT * -->
+<%- include('../includes/foot.ejs') %>

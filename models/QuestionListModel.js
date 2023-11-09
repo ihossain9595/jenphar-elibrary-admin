@@ -1,15 +1,73 @@
+const { DataTypes } = require("sequelize");
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
   const QuestionListModel = sequelize.define(
     "QuestionListModel",
     {
-      quiz_id: Sequelize.INTEGER,
-      question: Sequelize.STRING(255),
-      option_1: Sequelize.STRING(255),
-      option_2: Sequelize.STRING(255),
-      option_3: Sequelize.STRING(255),
-      option_4: Sequelize.STRING(255),
+      id: {
+        type: DataTypes.INTEGER(11).UNSIGNED,
+        allowNull: false,
+        defaultValue: null,
+        primaryKey: true,
+        autoIncrement: true,
+        comment: null,
+        field: "id",
+      },
+      quiz_id: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "quiz_id",
+      },
+      question: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "question",
+      },
+      option_1: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "option_1",
+      },
+      option_2: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "option_2",
+      },
+      option_3: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "option_3",
+      },
+      option_4: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "option_4",
+      },
       answer: {
         type: Sequelize.ENUM,
         values: ["op_1", "op_2", "op_3", "op_4"],
@@ -31,5 +89,6 @@ module.exports = (sequelize) => {
       updatedAt: false,
     }
   );
+
   return QuestionListModel;
 };

@@ -6,7 +6,10 @@
       <div id="title_box_quiz_secondary">
         <div class="flex_box">
           <h1 class="title"><%=title%></h1>
-          <a class="button_add" href="/add_quiz">Add Quiz</a>
+          <div class="button_box">
+            <a class="button_add" href="/quiz_list">Quiz List</a>
+            <a class="button_add" style="margin-left: 8px;" href="/add_question/<%= id %>">Add Question</a>
+          </div>
         </div>
         <hr class="line">
       </div>
@@ -23,16 +26,16 @@
       <!-- ERROR -->
 
       <!-- Table -->
-      <main id="quiz_list">
+      <main id="question_list">
         <table id="data_list" class="table datatable-basic table-bordered table-striped table-hover">
           <thead class="head">
             <tr>
-              <th>Name</th>
-              <th>Duration</th>
-              <th>Category</th>
-              <th>Start</th>
-              <th>End</th>
-              <th>Status</th>
+              <th>Question</th>
+              <th>Option 1</th>
+              <th>Option 2</th>
+              <th>Option 3</th>
+              <th>Option 4</th>
+              <th>Answer</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -43,7 +46,7 @@
       <!-- Table -->
     </div>
   </div>
-  
+
   <script>
     const options = {
       year: "numeric",
@@ -61,7 +64,14 @@
     }
   
     $(document).ready(function () {
+        var currentURL = window.location.href;
+        var parts = currentURL.split("/");
+        var id = parts[parts.length - 1];
+  
       function dataLoad() {
+        const data = {
+          id: id,
+        };
         $("#data_list").DataTable({
           processing: true,
           serverSide: true,
@@ -70,21 +80,13 @@
           destroy: true,
           pageLength: 50,
           ajax: {
-            url: "/quiz_list/data_list",
+            url: "/question_list/data_list",
             type: "POST",
             datatype: "json",
+            data: data,
           },
-          createdRow: function (row, data, dataIndex) {
-            $("td:eq(0)", row).html("<a href='/question_list/" + data.id + "'> " + data.name + "</a>");
-            if (data.status === "Published") {
-              $("td:eq(5)", row).html('<span class="badge badge-success">Published</span>');
-            } else {
-              $("td:eq(5)", row).html('<span class="badge badge-secondary">Unpublished</span>');
-            }
-            $("td:eq(3)", row).html("<span>" + changeDateTimeFormat(data.start_time) + "</span>");
-            $("td:eq(4)", row).html("<span>" + changeDateTimeFormat(data.end_time) + "</span>");
-          },
-          columns: [{ data: "name" }, { data: "time_duration" }, { data: "category" }, { data: "start_time" }, { data: "end_time" }, { data: "status" }, { data: "action" }],
+          createdRow: function (row, data, dataIndex) {},
+          columns: [{ data: "question" }, { data: "option_1" }, { data: "option_2" }, { data: "option_3" }, { data: "option_4" }, { data: "answer" }, { data: "action" }],
         });
       }
   
@@ -93,6 +95,7 @@
       // Custom bootbox dialog with form
       $("#data_list").on("click", "#delete", function () {
         var delid = $(this).attr("data-delete-id");
+          console.log(delid)
         bootbox.confirm({
           title: "Delete",
           message: "Do you want to delete?",
@@ -110,13 +113,13 @@
             if (result) {
               $.ajax({
                 type: "post",
-                url: "/quiz_list/delete",
+                url: "/question_list/delete",
                 data: { del_id: delid },
                 datatype: "json",
                 traditional: true,
                 success: function (data) {
                   if (data.success) {
-                    window.location.href = "/quiz_list";
+                    window.location.href = "/question_list/" + id;
                   } else {
                     bootbox.alert({
                       title: "Delete Failed!",
@@ -135,5 +138,5 @@
       });
     });
   </script>
-
+  
 <%- include('../includes/foot.ejs') %>

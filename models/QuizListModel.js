@@ -41,5 +41,6 @@ module.exports = (sequelize) => {
       updatedAt: false,
     }
   );
+  
   return QuizListModel;
 };

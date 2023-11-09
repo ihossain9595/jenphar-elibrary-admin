@@ -1,7 +1,5 @@
 /* ERROR */
 #error_full {
-  margin-top: 2.4rem;
-
   .message_error,
   .message_success {
     width: 100%;
@@ -29,11 +27,11 @@
 }
 
 #error_half {
-  margin-top: 2.4rem;
+  width: 50%;
 
   .message_error,
   .message_success {
-    width: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,6 +94,7 @@
     }
 
     .button_add {
+      display: inline-block;
       font-size: 1.4rem;
       font-weight: 600;
       line-height: 1;
@@ -125,7 +124,7 @@
 >
 >
 */
-/* ADD QUIZ */
+/* ADD QUIZ - EDIT QUIZ */
 #content_box_quiz_add {
   display: flex;
   justify-content: center;
@@ -183,46 +182,44 @@
   }
 }
 
-/* ADD QUIZ */
-/*
->
->
->
-*/
-#quiz_add_question {
-  margin-top: 2.4rem;
-
-  .form {
+#content_box_quiz_edit {
+  display: flex;
+  justify-content: center;
+  
+  .edit_quiz {
+    background-color: var(--blue-primary-1);
+    border: 1px solid var(--blue-primary-1);
     width: 50%;
-    background-color: var(--blue-secondary-05);
-    border-radius: 0.8rem;
-    padding: 2.4rem;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
 
     .label {
       display: block;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 500;
-      color: var(--blue-primary);
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.2rem;
+      color: var(--blue-secondary);
     }
 
+    
     .input_text,
     .input_number,
     .input_select {
-      display: block;
       width: 100%;
-      border: 1px solid var(--blue-primary);
-      border-radius: 0.4rem;
-      padding: 0.8rem 1.2rem;
+      display: block;
+      border: 1px solid var(--blue-primary-1);
+      background-color: var(--white);
+      border-radius: 0.8rem;
+      padding: 1.2rem;
       font-family: "Ubuntu", sans-serif;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 400;
-      margin-top: 0.6rem;
+      margin-top: 0.4rem;
     }
-
+  
     .button_submit {
-      margin-top: 1.2rem;
-      font-size: 1.6rem;
+      width: 100%;
+      font-size: 1.5rem;
       font-weight: 600;
       line-height: 1;
       cursor: pointer;
@@ -230,6 +227,71 @@
       border-radius: 0.8rem;
       padding: 1.2rem 3.2rem;
       background-color: var(--blue-secondary);
+      border: 1px solid var(--blue-secondary);
+      color: var(--white);
+      transition: 0.2s;
+  
+      &:hover {
+        background-color: var(--blue-secondary-hover);
+      }
+    }
+  
+  }
+}
+/* ADD QUIZ - EDIT QUIZ */
+/*
+>
+>
+>
+*/
+/* ADD QUESTION - EDIT QUESTION */
+#content_box_question_add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .add_question {
+    background-color: var(--blue-primary-1);
+    border: 1px solid var(--blue-primary-1);
+    width: 50%;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+
+    .label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      color: var(--blue-secondary);
+    }
+
+    .input_text,
+    .input_number,
+    .input_select {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--blue-primary-1);
+      background-color: var(--white);
+      border-radius: 0.8rem;
+      padding: 1.2rem;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-top: 0.4rem;
+    }
+
+    .button_submit {
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1;
+      cursor: pointer;
+      border: none;
+      border-radius: 0.8rem;
+      padding: 1.2rem 3.2rem;
+      background-color: var(--blue-secondary);
+      border: 1px solid var(--blue-secondary);
       color: var(--white);
       transition: 0.2s;
 
@@ -241,9 +303,19 @@
     .quiz_option_box {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
+      column-gap: 1.2rem;
     }
   }
+}
+/* ADD QUESTION - EDIT QUESTION */
+/*
+>
+>
+>
+*/
+/* QUIZ LIST - QUESTION LIST */
+#quiz_list * {
+  font-size:  1.4rem;
 }
 
 #quiz_list {
@@ -253,20 +325,20 @@
 
   #data_list {
     .head tr th {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 500;
       line-height: 1.2;
+      padding: 1.2rem;
       background-color: var(--blue-secondary);
       color: var(--white);
-      padding: 1rem 1.6rem;
     }
 
     .body tr td {
       font-size: 1.4rem;
       font-weight: 400;
       line-height: 1.2;
+      padding: 1rem 1.2rem;
       color: var(--black);
-      padding: 1rem 1.6rem;
     }
 
     #delete {
@@ -295,6 +367,103 @@
     }
   }
 }
+
+#question_list * {
+  font-size:  1.4rem;
+}
+
+#question_list {
+  margin-top: 2.4rem;
+  overflow-x: auto !important;
+  max-width: 100%;
+
+  #data_list {
+    .head tr th {
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.2;
+      padding: 1.2rem;
+      background-color: var(--blue-secondary);
+      color: var(--white);
+    }
+
+    .body tr td {
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.2;
+      padding: 1rem 1.2rem;
+      color: var(--black);
+    }
+
+    #delete {
+      display: inline-block;
+      width: auto;
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 1;
+      background-color: red;
+      color: var(--white);
+      border-radius: 0.4rem;
+      padding: 0.6rem 0.8rem;
+      margin-right: 1.2rem;
+    }
+
+    #preview {
+      display: inline-block;
+      width: auto;
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 1;
+      background-color: var(--blue-secondary);
+      color: var(--white);
+      border-radius: 0.4rem;
+      padding: 0.6rem 0.8rem;
+    }
+  }
+}
+
+.my_dropdown {
+  background-color: white !important;
+  min-width: 100%;
+  padding: 6px;
+}
+
+.my_dropdown_edit {
+  display: block !important;
+  padding: 6px 12px !important;
+  border: 1px solid blue !important;
+  background-color: blue !important;
+  color: white !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  margin-bottom: 4px;
+
+  &:hover {
+    background-color: #0000e6 !important;
+  }
+}
+
+.my_dropdown_delete {
+  display: block !important;
+  padding: 6px 12px !important;
+  border: 1px solid red !important;
+  background-color: red !important;
+  color: white !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  margin-right: 0 !important;
+
+  &:hover {
+    background-color: #e60000 !important;
+  }
+}
+/* QUIZ LIST - QUESTION LIST */
+/*
+>
+>
+>
+*/
+
 
 #quiz_list_question {
   margin-top: 2.4rem;

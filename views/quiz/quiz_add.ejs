@@ -2,11 +2,11 @@
 
   <div id="content_box">
     <div class="main_box">
-    <!-- Intro -->
-    <div id="title_box_quiz_primary">
-      <h1 class="title"><%= title %></h1>
-      <hr class="line">
-    </div>
+      <!-- Intro -->
+      <div id="title_box_quiz_primary">
+        <h1 class="title"><%= title %></h1>
+        <hr class="line">
+      </div>
 
       <!-- ERROR -->
       <div id="error_half">
@@ -18,9 +18,9 @@
       </div>
       <!-- ERROR -->
 
+      <!-- FORM -->
       <div id="content_box_quiz_add">
-        <!-- FORM -->
-        <form id="form" class="add_quiz" action="/admin/quiz/add-quiz" method="POST">
+        <form id="form" class="add_quiz" action="/quiz/add_quiz" method="POST">
           <label class="label" for="name">
             Name
             <input class="input_text" id="name" name="name" type="text" placeholder="Input quiz name" required />
@@ -64,8 +64,8 @@
 
           <button class="button_submit" type="submit">Submit</button>
         </form>
-        <!-- FORM -->
       </div>
+      <!-- FORM -->
     </div>
   </div>
 
