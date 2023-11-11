@@ -1,7 +1,7 @@
 #content_box {
   padding: 1.2rem;
   background-color: var(--blue-primary);
-  
+
   .main_box {
     height: calc(100vh - 2.4rem);
     overflow: hidden;
@@ -25,13 +25,13 @@
     width: 100%;
     border: 1px solid var(--blue-primary-1);
     margin: 2.4rem 0;
-   }
+  }
 }
 
 #content_box_result {
   display: flex;
   justify-content: center;
-  
+
   .download_result {
     background-color: var(--blue-primary-1);
     border: 1px solid var(--blue-primary-1);
@@ -46,7 +46,7 @@
       margin-bottom: 1.2rem;
       color: var(--blue-secondary);
     }
-  
+
     .myInput {
       width: 100%;
       display: block;
@@ -59,7 +59,7 @@
       font-weight: 400;
       margin-top: 0.4rem;
     }
-  
+
     .button_download {
       width: 100%;
       font-size: 1.5rem;
@@ -73,12 +73,11 @@
       border: 1px solid var(--blue-secondary);
       color: var(--white);
       transition: 0.2s;
-  
+
       &:hover {
         background-color: var(--blue-secondary-hover);
       }
     }
-  
   }
 }
 
@@ -135,39 +134,122 @@
   display: flex;
   align-items: center;
 }
-
 #admin_dashboard .plus_icon .icon {
   fill: var(--blue-secondary);
   font-size: 5rem;
   transition: 0.2s;
 }
-
 #admin_dashboard .plus_icon .icon:hover {
   fill: var(--blue-secondary-hover);
 }
 
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
-/*  */
+/* USER ACCESS */
 
+#access_active {
+  width: 100%;
+  display: block;
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 0.8rem;
+  padding: 2.4rem;
+  margin-bottom: 2.4rem;
+  color: #fff;
+  background-color: #4cbb17;
+}
+#access_inactive {
+  width: 100%;
+  display: block;
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 0.8rem;
+  padding: 2.4rem;
+  margin-bottom: 2.4rem;
+  color: #fff;
+  background-color: red;
+}
+
+#content_box_access {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .access {
+    background-color: var(--blue-primary-1);
+    border: 1px solid var(--blue-primary-1);
+    width: 50%;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+
+    .label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      color: var(--blue-secondary);
+    }
+
+    .select_radio {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border: 1px solid var(--blue-primary-1);
+      background-color: var(--white);
+      border-radius: 0.8rem;
+      padding: 1.2rem;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+
+    .button_submit {
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1;
+      cursor: pointer;
+      border: none;
+      border-radius: 0.8rem;
+      padding: 1.2rem 3.2rem;
+      background-color: var(--blue-secondary);
+      border: 1px solid var(--blue-secondary);
+      color: var(--white);
+      transition: 0.2s;
+
+      &:hover {
+        background-color: var(--blue-secondary-hover);
+      }
+    }
+  }
+}
+
+/* USER ACCESS */
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
 
 /* ! */
 
@@ -468,66 +550,6 @@
 }
 
 /* ! */
-
-.access {
-  display: block;
-  background-color: #4cbb17;
-  color: #fff;
-  font-size: 2.4rem;
-  font-weight: 500;
-  text-align: center;
-  border-radius: 0.8rem;
-  padding: 2.4rem;
-  margin-bottom: 2.4rem;
-}
-.access_active {
-  background-color: #4cbb17;
-}
-.access_inactive {
-  background-color: red;
-}
-
-.access_yes,
-.access_no {
-  font-size: 1.6rem;
-  font-weight: 500;
-}
-.label {
-  color: var(--blue-secondary);
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-.access_button {
-  display: inline-block;
-  background-color: var(--blue-secondary);
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 500;
-  border: none;
-  border-radius: 0.8rem;
-  padding: 0.8rem 3.2rem;
-  margin-top: 0.8rem;
-}
-
-.access_button {
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 1;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.8rem;
-  padding: 1.2rem 3.2rem;
-  transition: 0.2s;
-  margin-right: 0.8rem;
-  background-color: var(--blue-secondary);
-  border: 1px solid var(--blue-secondary);
-  color: var(--white);
-  margin-top: 1.2rem;
-}
-.access_button:hover {
-  background-color: var(--blue-secondary-hover);
-}
 
 /* ! Add Medicine ! */
 

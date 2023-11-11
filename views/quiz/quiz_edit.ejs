@@ -7,18 +7,20 @@
         <h1 class="title"><%= title %></h1>
         <hr class="line">
       </div>
-
-      <!-- ERROR -->
-      <div id="error_half">
-        <% if (messages.error) { %>
-        <div class="message_error">Error! <%- messages.error %></div>
-        <% } %> <% if (messages.success) { %>
-        <div class="message_success">Success! <%- messages.success %></div>
-        <% } %>
-      </div>
-      <!-- ERROR -->
+      <!-- Intro -->
 
       <div id="content_box_quiz_edit">
+        <!-- ERROR -->
+        <div id="error_half">
+          <% if (messages.error) { %>
+          <div class="message_error">Error! <%- messages.error %></div>
+          <% } %> <% if (messages.success) { %>
+          <div class="message_success">Success! <%- messages.success %></div>
+          <% } %>
+        </div>
+        <!-- ERROR -->
+        
+        <!-- Form -->
         <form id="form" class="edit_quiz" action="/quiz_list/edit/<%= id %>" method="POST">
           <input type="hidden" name="id" value="<%= id %>" />
 
@@ -65,6 +67,7 @@
 
           <button class="button_submit" type="submit">Submit</button>
         </form>
+        <!-- Form -->
       </div>
     </div>
   </div>

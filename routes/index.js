@@ -8,7 +8,7 @@ const AdminDownload = require("../controllers/admin/AdminDownload");
 const AdminOption = require("../controllers/admin/AdminOption");
 const AdminUpload = require("../controllers/admin/AdminUpload");
 
-const LoginAccess = require("../controllers/login_access/LoginAccess");
+const UserAccess = require("../controllers/login_access/UserAccess");
 
 const QuizResult = require("../controllers/quiz/QuizResult");
 const QuizList = require("../controllers/quiz/QuizList");
@@ -92,7 +92,7 @@ router.post("/quiz_list/delete", QuizList.delete_quiz);
 //
 //
 //
-// ! Show Question - Add Question - Edit Question - Delete Question
+// Show Question - Add Question - Edit Question - Delete Question
 router.get("/question_list/:id", function (req, res, next) {
   if (isAdminLogin(req, res)) {
     QuestionList.get_question_list(req, res, next);
@@ -103,25 +103,35 @@ router.post("/question_list/data_list", QuestionList.data_list);
 
 router.get("/add_question/:id", function (req, res, next) {
   if (isAdminLogin(req, res)) {
-      QuestionList.get_add_question(req, res, next);
-    }
-  });
+    QuestionList.get_add_question(req, res, next);
+  }
+});
 
 router.post("/quiz/add_question/:id", QuestionList.post_add_question);
 
 router.post("/question_list/delete", QuestionList.delete_question);
-// ! Show Question - Add Question - Edit Question - Delete Question
+// Show Question - Add Question - Edit Question - Delete Question
 //
 //
 //
-// Quiz Result
-router.get("/quiz_result", function (req, res) {
+// User Access
+router.get("/user_access", async function (req, res, next) {
   if (isAdminLogin(req, res)) {
-    QuizResult.quiz_list(req, res);
+    UserAccess.get_user_access(req, res, next);
   }
 });
 
-router.post("/download/quiz_result", QuizResult.download_result);
+router.post("/user_access/update", UserAccess.update_user_access);
+// User Access
+
+// Quiz Result
+// router.get("/quiz_result", function (req, res) {
+//   if (isAdminLogin(req, res)) {
+//     QuizResult.quiz_list(req, res);
+//   }
+// });
+
+// router.post("/download/quiz_result", QuizResult.download_result);
 // Quiz Result
 //
 //
@@ -193,21 +203,5 @@ router.post("/download/quiz_result", QuizResult.download_result);
 //   res.sendStatus(200);
 // });
 // ! TRACK
-
-// ! USER ACCESS
-// router.get("/admin/user-access", async function (req, res, next) {
-//   const errorHandler = (error) => {
-//     req.flash("error", error);
-//     res.redirect("/login-user");
-//   };
-
-//   let status = await UserLoginStatus.findOne({ where: { id: 1 } }).catch(errorHandler);
-//   res.render("user_access", { title: "User Access", data: status });
-// });
-
-// router.post("/admin/user-access/save", async function (req, res, next) {
-//   LoginAccess.update(req, res, next);
-// });
-// ! USER ACCESS
 
 module.exports = router;

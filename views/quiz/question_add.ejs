@@ -8,11 +8,11 @@
         <h1 class="title"><%=title%></h1>
         <a class="button_add" href="/question_list/<%= id %>">Question List</a>
       </div>
-      <hr class="line">
+      <hr class="line" />
     </div>
     <!-- Intro -->
 
-    <main id="content_box_question_add">
+    <div id="content_box_question_add">
       <!-- ERROR -->
       <div id="error_half">
         <% if (messages.error) { %>
@@ -63,9 +63,8 @@
         <button class="button_submit" type="submit">Submit</button>
       </form>
       <!-- Form -->
-    </main>
+    </d>
   </div>
 </div>
-  
-<%- include('../includes/foot.ejs') %>
 
+<%- include('../includes/foot.ejs') %>
