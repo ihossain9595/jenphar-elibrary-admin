@@ -6,15 +6,15 @@ const AdminMedicineUpload = require("../controllers/elibrary/AdminMedicineUpload
 
 const BrandList = require("../controllers/elibrary/BrandList");
 const OptionList = require("../controllers/elibrary/OptionList");
+const UploadContent = require("../controllers/elibrary/UploadContent");
 
 const AdminDownload = require("../controllers/elibrary/AdminDownload");
-const AdminUpload = require("../controllers/elibrary/AdminUpload");
 
 const UserAccess = require("../controllers/login_access/UserAccess");
 
-const QuizResult = require("../controllers/quiz/QuizResult");
 const QuizList = require("../controllers/quiz/QuizList");
 const QuestionList = require("../controllers/quiz/QuestionList");
+const QuizResult = require("../controllers/quiz/QuizResult");
 
 const { UserLogModel, UserLoginStatus } = require("../models");
 const moment = require("moment/moment");
@@ -82,6 +82,19 @@ router.get("/elibrary/options", function (req, res, next) {
     OptionList.get_options(req, res, next);
   }
 });
+
+router.get("/elibrary/upload", function (req, res, next) {
+  if (isAdminLogin(req, res)) {
+    UploadContent.get_upload_content(req, res, next);
+  }
+});
+
+router.post("/elibrary/upload", UploadContent.uploads);
+
+router.post("/elibrary/delete", UploadContent.delete);
+
+// router.post("/admin/add-medicine/upload", AdminMedicineUpload.upload);
+
 // E-Library - Brands - Options
 //
 //
@@ -176,19 +189,6 @@ router.post("/user_access/update", UserAccess.update_user_access);
 //   }
 // });
 
-
-
-// router.get("/admin/e-library/upload", function (req, res, next) {
-//   if (isAdminLogin(req, res)) {
-//     AdminOption._upload_media(req, res, next);
-//   }
-// });
-
-// router.post("/admin/upload", AdminUpload.uploads);
-
-// router.post("/admin/add-medicine/upload", AdminMedicineUpload.upload);
-
-// router.post("/file/del", AdminOption.delete);
 
 // ! ADMIN
 

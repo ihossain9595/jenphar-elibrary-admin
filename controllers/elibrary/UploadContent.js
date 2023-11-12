@@ -4,6 +4,15 @@ const multer = require("multer");
 const { sequelize, MediaListModel } = require("../../models");
 const { QueryTypes } = require("sequelize");
 
+exports.get_upload_content = async (req, res) => {
+  const brand_id = req.query.brand_id;
+  const type = req.query.type;
+
+  const query_data = await sequelize.query(`SELECT * FROM media_list WHERE brand_id = '${brand_id}' AND type = '${type}'order by id DESC ;`, { type: QueryTypes.SELECT });
+
+  res.render("elibrary/upload", { title: type, brand_id: brand_id, type: type, data: query_data });
+};
+
 exports.uploads = [
   async (req, res, next) => {
     const storage = multer.diskStorage({
@@ -30,7 +39,7 @@ exports.uploads = [
 
       const errorHandler = (err) => {
         req.flash("error", err.original.sqlMessage);
-        res.redirect(`/admin/e-library/upload?type='${getType}'&brand_id='${getBrandId}'`);
+        res.redirect(`/elibrary/upload?type='${getType}'&brand_id='${getBrandId}'`);
       };
 
       let data = [];
@@ -64,7 +73,18 @@ exports.uploads = [
       const insertDataList = await MediaListModel.bulkCreate(data).catch(errorHandler);
 
       req.flash("success", "Data upload successfully.");
-      res.redirect("/admin/e-library/upload?type=" + type + "&brand_id=" + brand_id);
+      res.redirect("/elibrary/upload?type=" + type + "&brand_id=" + brand_id);
     });
   },
 ];
+
+exports.delete = async (req, res, next) => {
+  const errorHandler = (err) => {
+    return res.status(500).json({ success: false, error: err.original.sqlMessage });
+  };
+  const results = await MediaListModel.destroy({ where: { id: req.body.del_id } }).catch(errorHandler);
+  return res.status(200).json({
+    success: true,
+    result: results,
+  });
+};
