@@ -9,49 +9,81 @@ exports.quiz_list = async (req, res) => {
   res.render("quiz_result", { title: "Quiz Result", data: quiz_data });
 };
 
-exports.download = async (req, res, next) => {
+exports.download_result = async (req, res, next) => {
   const quiz_id = req.body.quiz_id;
-  const userDetails = req.session.user;
 
-  console.log("+_+_+_+_+_+_+_+_+_+_+");
-  console.log(quiz_id);
-  console.log("+_+_+_+_+_+_+_+_+_+_+");
+  const quiz_log = await sequelize.query(`SELECT ul.work_area_t, ul.name, qul.quiz_id, qzl.name AS quiz_name, al.question_id, qul.question, qul.answer, al.user_answer, qul.option_1, qul.option_2, qul.option_3, qul.option_4 FROM user_list ul INNER JOIN answer_list al ON ul.work_area_t = al.user_id INNER JOIN question_list qul ON al.question_id = qul.id INNER JOIN quiz_list qzl ON qul.quiz_id = qzl.id WHERE qul.quiz_id = ${quiz_id};`, { type: QueryTypes.SELECT });
 
-  // const quiz_log = await sequelize.query(`SELECT ul.*, uli.name FROM user_log ul INNER JOIN user_list uli ON ul.user_id=uli.work_area_t WHERE DATE(ul.log_time) BETWEEN '${formatStartDate}' AND '${formatEndDate}' AND ul.log_type != 'login';`, { type: QueryTypes.SELECT });
+  const workbook = new excel.Workbook();
+  const worksheet = workbook.addWorksheet("Users");
 
-  // const workbook = new excel.Workbook();
-  // const worksheet = workbook.addWorksheet("Users");
+  worksheet.columns = [
+    { header: "Sl", key: "sl", width: 5 },
+    { header: "Employee Id", key: "work_area_t", width: 10 },
+    { header: "Name", key: "name", width: 20 },
+    { header: "Quiz Name", key: "quiz_name", width: 10 },
+    { header: "Question", key: "question", width: 10 },
+    { header: "Answer", key: "answer", width: 10 },
+    { header: "Answer by Employee", key: "answer_employee", width: 10 },
+    { header: "Mark", key: "mark", width: 10 },
+    { header: "Option 1", key: "option_1", width: 10 },
+    { header: "Option 2", key: "option_2", width: 10 },
+    { header: "Option 3", key: "option_3", width: 10 },
+    { header: "Option 4", key: "option_4", width: 10 },
+    { header: "Total Mark", key: "total_mark", width: 10 },
+  ];
 
-  // worksheet.columns = [
-  //   { header: "SL", key: "sl", width: 5 },
-  //   { header: "Name", key: "name", width: 20 },
-  //   { header: "Employee Id", key: "user_id", width: 15 },
-  //   { header: "Date", key: "date", width: 15 },
-  //   { header: "Time", key: "time", width: 15 },
-  //   { header: "Duration (M)", key: "duration", width: 15 },
-  // ];
+  const markCount = new Map();
 
-  // user_log.forEach((user, i) => {
-  //   const dateTimeString = user.log_time;
-  //   const stayTimeMinuties = user.stay_time / 60000;
-  //   const dateTime = new Date(dateTimeString);
+  quiz_log.forEach((quiz, i) => {
+    let isCorrect;
+    if (quiz.answer === quiz.user_answer) {
+      isCorrect = 1;
+    } else {
+      isCorrect = 0;
+    }
 
-  //   const formattedDateString = dateTime.toLocaleDateString();
-  //   const formattedTimeString = dateTime.toLocaleTimeString();
+    const currentMark = markCount.get(quiz.work_area_t) || 0;
+    markCount.set(quiz.work_area_t, currentMark + isCorrect);
 
-  //   worksheet.addRow({ sl: i + 1, date: formattedDateString, time: formattedTimeString, duration: stayTimeMinuties, ...user });
-  // });
+    worksheet.addRow({ sl: i + 1, work_area_t: quiz.work_area_t, name: quiz.name, quiz_name: quiz.quiz_name, question: quiz.question, answer: quiz.answer, answer_employee: quiz.user_answer, mark: isCorrect, option_1: quiz.option_1, option_2: quiz.option_2, option_3: quiz.option_3, option_4: quiz.option_4,  total_mark: currentMark + isCorrect, });
+  });
 
-  // res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-  // res.setHeader("Content-Disposition", "attachment; filename=jenphar-reporting-sheet.xlsx");
+  let lastEmployeeId = null;
+  let lastEmployeeIdRowIndex = null;
 
-  // workbook.xlsx
-  //   .write(res)
-  //   .then(() => {
-  //     res.end();
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error generating Excel file:", error);
-  //     res.status(500).send("Error generating Excel file");
-  //   });
+worksheet.eachRow((row, rowNumber) => {
+  const employeeId = row.getCell("work_area_t").value;
+
+  if (employeeId !== lastEmployeeId) {
+    if (lastEmployeeIdRowIndex !== null && lastEmployeeIdRowIndex !== rowNumber - 1) {
+      const totalMarkFormula = `SUM(M${lastEmployeeIdRowIndex}:M${rowNumber - 1})`;
+      worksheet.mergeCells(`C${lastEmployeeIdRowIndex}:C${rowNumber - 1}`);
+      worksheet.mergeCells(`M${lastEmployeeIdRowIndex}:M${rowNumber - 1}`);
+      worksheet.getCell(`M${lastEmployeeIdRowIndex}`).value = { formula: totalMarkFormula, result: markCount.get(lastEmployeeId) };
+    }
+    lastEmployeeId = employeeId;
+    lastEmployeeIdRowIndex = rowNumber;
+  }
+});
+
+if (lastEmployeeIdRowIndex !== null) {
+  const totalMarkFormula = `SUM(M${lastEmployeeIdRowIndex}:M${worksheet.rowCount})`;
+  worksheet.mergeCells(`C${lastEmployeeIdRowIndex}:C${worksheet.rowCount}`);
+  worksheet.mergeCells(`M${lastEmployeeIdRowIndex}:M${worksheet.rowCount}`);
+  worksheet.getCell(`M${lastEmployeeIdRowIndex}`).value = { formula: totalMarkFormula, result: markCount.get(lastEmployeeId) };
+}
+
+  res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+  res.setHeader("Content-Disposition", `attachment; filename=jenphar-quiz-result.xlsx`);
+
+  workbook.xlsx
+    .write(res)
+    .then(() => {
+      res.end();
+    })
+    .catch((error) => {
+      console.error("Error generating Excel file:", error);
+      res.status(500).send("Error generating Excel file");
+    });
 };

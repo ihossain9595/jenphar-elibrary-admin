@@ -64,7 +64,7 @@ router.get("/dashboard", function (req, res) {
 //
 //
 //
-// E-Library - Brands - Options
+// E-Library - Brands - Options - Upload - Add Medicine
 router.get("/elibrary", function (req, res) {
   if (isAdminLogin(req, res)) {
     res.render("elibrary/elibrary", { title: "E-Library" });
@@ -100,8 +100,7 @@ router.get("/elibrary/add_medicine", function (req, res) {
 });
 
 router.post("/elibrary/add_medicine/upload", UploadMedicine.upload);
-
-// E-Library - Brands - Options
+// E-Library - Brands - Options - Upload - Add Medicine
 //
 //
 //
@@ -182,46 +181,13 @@ router.post("/reports/download", DownloadReports.download);
 //
 //
 // Quiz Result
-// router.get("/quiz_result", function (req, res) {
-//   if (isAdminLogin(req, res)) {
-//     QuizResult.quiz_list(req, res);
-//   }
-// });
+router.get("/quiz_result", function (req, res, next) {
+  if (isAdminLogin(req, res)) {
+    QuizResult.quiz_list(req, res, next);
+  }
+});
 
-// router.post("/download/quiz_result", QuizResult.download_result);
+router.post("/quiz_result/download", QuizResult.download_result);
 // Quiz Result
-//
-//
-//
-// ! ADMIN
-// router.get("/admin/reports", function (req, res) {
-//   if (isAdminLogin(req, res)) {
-//     res.render("admin_reports", { title: "Reports" });
-//   }
-// });
-
-// router.post("/admin/download/reports", AdminDownload.download);
-// ! ADMIN
-
-// ! TRACK
-// router.post("/track-time", async function (req, res, next) {
-//   const { timeSpent, currentURL } = req.body;
-
-//   const errorHandler = (error) => {
-//     console.log(error);
-//   };
-//   const insert_data = {
-//     user_id: req.session.user.work_area_t,
-//     stay_time: timeSpent,
-//     log_time: moment().format(),
-//     log_type: "duration",
-//     url: currentURL,
-//   };
-
-//   const data_insert = await UserLogModel.create(insert_data).catch(errorHandler);
-
-//   res.sendStatus(200);
-// });
-// ! TRACK
 
 module.exports = router;

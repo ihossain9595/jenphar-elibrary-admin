@@ -70,7 +70,7 @@ module.exports = (sequelize) => {
       },
       answer: {
         type: Sequelize.ENUM,
-        values: ["op_1", "op_2", "op_3", "op_4"],
+        values: ["1", "2", "3", "4"],
       },
       created_at: {
         type: "TIMESTAMP",

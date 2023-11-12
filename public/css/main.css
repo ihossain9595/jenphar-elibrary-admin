@@ -251,47 +251,6 @@
     }
   }
 }
-#download_report 
-
-#download_report .myLabel {
-  display: block;
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: var(--blue-secondary);
-  margin-bottom: 1.2rem;
-}
-
-#download_report .myInput {
-  display: block;
-  width: 50%;
-  border: 1px solid var(--blue-primary-5);
-  border-radius: 0.4rem;
-  background-color: var(--blue-primary-1);
-  padding: 0.8rem 1.2rem;
-  font-family: "Ubuntu", sans-serif;
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin-top: 0.4rem;
-}
-
-#download_report .button {
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 1;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.8rem;
-  padding: 1.2rem 3.2rem;
-  transition: 0.2s;
-  margin-right: 0.8rem;
-  background-color: var(--blue-secondary);
-  border: 1px solid var(--blue-secondary);
-  color: var(--white);
-  margin-top: 1.2rem;
-}
-#download_report .button:hover {
-  background-color: var(--blue-secondary-hover);
-}
 /* REPORTS */
 /*
 >
