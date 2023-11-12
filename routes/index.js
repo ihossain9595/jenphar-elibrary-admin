@@ -2,11 +2,11 @@ var express = require("express");
 var router = express.Router();
 
 const Login = require("../controllers/login/Login");
-const AdminMedicineUpload = require("../controllers/elibrary/AdminMedicineUpload");
 
 const BrandList = require("../controllers/elibrary/BrandList");
 const OptionList = require("../controllers/elibrary/OptionList");
 const UploadContent = require("../controllers/elibrary/UploadContent");
+const UploadMedicine = require("../controllers/elibrary/UploadMedicine");
 
 const AdminDownload = require("../controllers/elibrary/AdminDownload");
 
@@ -93,7 +93,13 @@ router.post("/elibrary/upload", UploadContent.uploads);
 
 router.post("/elibrary/delete", UploadContent.delete);
 
-// router.post("/admin/add-medicine/upload", AdminMedicineUpload.upload);
+router.get("/elibrary/add_medicine", function (req, res) {
+  if (isAdminLogin(req, res)) {
+    res.render("elibrary/medicine_add", { title: "Add Medicine" });
+  }
+});
+
+router.post("/elibrary/add_medicine/upload", UploadMedicine.upload);
 
 // E-Library - Brands - Options
 //
@@ -181,15 +187,6 @@ router.post("/user_access/update", UserAccess.update_user_access);
 // });
 
 // router.post("/admin/download/reports", AdminDownload.download);
-
-
-// router.get("/admin/add-medicine", function (req, res) {
-//   if (isAdminLogin(req, res)) {
-//     res.render("admin_add_medicine", { title: "Add Medicine" });
-//   }
-// });
-
-
 // ! ADMIN
 
 // ! TRACK

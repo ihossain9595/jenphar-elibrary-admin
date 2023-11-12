@@ -1,4 +1,3 @@
-const path = require("path");
 const multer = require("multer");
 
 const { MedicineListModel } = require("../../models");
@@ -35,7 +34,7 @@ exports.upload = [
 
       const errorHandler = (err) => {
         req.flash("error", err);
-        res.redirect("/admin/add-medicine");
+        res.redirect("/admin/add_medicine");
       };
 
       data.push({
@@ -45,14 +44,10 @@ exports.upload = [
         status: 1,
       });
 
-      console.log("--- --- --- --- ---");
-      console.log(data[0]);
-      console.log("--- --- --- --- ---");
-
       const insertDataList = await MedicineListModel.create(data[0]).catch(errorHandler);
 
       req.flash("success", "Data upload successfully.");
-      res.redirect("/admin/add-medicine");
+      res.redirect("/elibrary/add_medicine");
     });
   },
 ];

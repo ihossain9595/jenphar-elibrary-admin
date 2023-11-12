@@ -1,0 +1,53 @@
+<%- include('../includes/head.ejs') %>
+
+<div id="content_box">
+  <div class="main_box">
+    <!-- Intro -->
+    <div id="title_box_quiz_primary">
+      <h1 class="title"><%= title %></h1>
+      <hr class="line" />
+    </div>
+    <!-- Intro -->
+
+    <div id="content_box_add_medicine">
+      <!-- ERROR -->
+      <div id="error_half">
+        <% if (messages.error) { %>
+        <div class="message_error">Error! <%- messages.error %></div>
+        <% } %> <% if (messages.success) { %>
+        <div class="message_success">Success! <%- messages.success %></div>
+        <% } %>
+      </div>
+      <!-- ERROR -->
+
+      <form id="addmedicine" class="add_medicine" action="/elibrary/add_medicine/upload" method="POST" enctype="multipart/form-data">
+        <!-- Medicine Name -->
+        <label class="label" for="medicine_name">
+          Medicine Name:
+          <input class="input_text" name="medicine_name" type="text" id="medicine_name" placeholder="Medicine Name" />
+        </label>
+
+        <!-- Category -->
+        <label class="label" for="category">
+          Category:
+          <select class="input_select" id="category" name="category" placeholder="Category">
+            <option value="Hematology">Hematology</option>
+            <option value="Oncology">Oncology</option>
+            <option value="Virology">Virology</option>
+          </select>
+        </label>
+
+        <!-- Brand Logo -->
+        <label class="label" for="brand_logo">
+          Brand Logo:
+          <input class="input_text" type="file" name="brand_logo" id="brand_logo" />
+        </label>
+
+        <!-- Upload -->
+        <button class="button_submit" type="submit">Upload</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../includes/foot.ejs') %>

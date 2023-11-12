@@ -64,7 +64,7 @@
           <tr>
               <th>File Name</th>
               <th>Created At</th>
-              <th style="width: 25rem;">Option</th>
+              <th style="width: 20rem;">Option</th>
           </tr>
           </thead>
 
@@ -74,8 +74,8 @@
                 <td><%=data[i].file%></td>
                 <td><%=data[i].created_at.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })%></td>
                 <td>
-                  <a data-delete-id='<%=data[i].id%>' href='javascript:void(0);' id='delete' class='dropdown-item'><i class='icon-trash-alt'></i>Delete</a>
-                  <a data-preview-file='<%=data[i].file%>' data-preview-type='<%=data[i].file_type%>' href='javascript:void(0);' id='preview' class='dropdown-item'><i class='icon-trash-alt'></i>Preview</a>
+                  <a data-delete-id='<%=data[i].id%>' href='javascript:void(0);' id='upload_delete' class='dropdown-item'>Delete</a>
+                  <a data-preview-file='<%=data[i].file%>' data-preview-type='<%=data[i].file_type%>' href='javascript:void(0);' id='upload_preview' class='dropdown-item'>Preview</a>
                 </td>
               </tr>
               <%}%>
@@ -117,7 +117,7 @@
   }
 
   // Custom bootbox dialog with form
-  $("#data_list").on('click', '#delete', function () {
+  $("#data_list").on('click', '#upload_delete', function () {
             var delid = $(this).attr('data-delete-id');
             bootbox.confirm({
                 title: 'Delete',
@@ -158,7 +158,7 @@
         });
   
   // Custom bootbox dialog with preview
-  $("#data_list").on('click', '#preview', function () {
+  $("#data_list").on('click', '#upload_preview', function () {
             var file = $(this).attr('data-preview-file');
             var type = $(this).attr('data-preview-type');
 
