@@ -5,9 +5,9 @@ const Login = require("../controllers/login/Login");
 const AdminMedicineUpload = require("../controllers/elibrary/AdminMedicineUpload");
 
 const BrandList = require("../controllers/elibrary/BrandList");
+const OptionList = require("../controllers/elibrary/OptionList");
 
 const AdminDownload = require("../controllers/elibrary/AdminDownload");
-const AdminOption = require("../controllers/elibrary/AdminOption");
 const AdminUpload = require("../controllers/elibrary/AdminUpload");
 
 const UserAccess = require("../controllers/login_access/UserAccess");
@@ -64,7 +64,7 @@ router.get("/dashboard", function (req, res) {
 //
 //
 //
-// E-Library - Category - 
+// E-Library - Brands - Options
 router.get("/elibrary", function (req, res) {
   if (isAdminLogin(req, res)) {
     res.render("elibrary/elibrary", { title: "E-Library" });
@@ -76,7 +76,13 @@ router.get("/elibrary/brands", function (req, res, next) {
     BrandList.get_brand_list(req, res, next);
   }
 });
-// E-Library - Category - 
+
+router.get("/elibrary/options", function (req, res, next) {
+  if (isAdminLogin(req, res)) {
+    OptionList.get_options(req, res, next);
+  }
+});
+// E-Library - Brands - Options
 //
 //
 //
@@ -170,11 +176,7 @@ router.post("/user_access/update", UserAccess.update_user_access);
 //   }
 // });
 
-// router.get("/admin/e-library/option", function (req, res, next) {
-//   if (isAdminLogin(req, res)) {
-//     AdminOption._view(req, res, next);
-//   }
-// });
+
 
 // router.get("/admin/e-library/upload", function (req, res, next) {
 //   if (isAdminLogin(req, res)) {

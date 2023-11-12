@@ -232,6 +232,69 @@
     }
   } 
 }
+
+#content_box_options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.4rem;
+
+  .info_box {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 2.4rem;
+    border-radius: 1.2rem;
+    transition: 0.2s;
+    border: 1px solid var(--blue-primary-1);
+    background-color: var(--blue-primary-1);
+
+    &:hover {
+      background-color: var(--blue-primary);
+    }
+
+    &:hover .name {
+      color: var(--white);
+    }
+
+    .icon_box {
+      flex-shrink: 0;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--blue-secondary);
+
+      .icon {
+        font-size: 2rem;
+        color: var(--white);
+      }
+    }
+
+    .name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--black);
+    }
+  }
+
+  .plus_icon {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      fill: #4cbb17;
+      font-size: 5rem;
+      transition: 0.2s;
+
+      &:hover {
+        fill: #5ec22e;
+      }
+    }
+  }
+}
 /* ELIBRARY - BRNADS */
 /*
 >

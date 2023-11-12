@@ -2,16 +2,17 @@
 
 <section id='content_box'>
     <div class='main_box'>
-      <!-- Intro -->
-      <div id="title_box_elibrary_primary">
+        <!-- Intro -->
+        <div id="title_box_elibrary_primary">
         <h1 class="title"><%= title %></h1>
         <hr class="line">
-      </div>
-      <!-- Intro -->
+        </div>
+        <!-- Intro -->
 
+        <!-- Main -->
         <div id='content_box_brands'>
             <%for(let i=0;i<data.length;i++){%>
-                <a class='med_info_box' href="/admin/e-library/option?id=<%=data[i].id%>&medicine_name=<%=data[i].medicine_name%>">
+                <a class='med_info_box' href="/elibrary/options?id=<%=data[i].id%>&medicine_name=<%=data[i].medicine_name%>">
                     <div class='image_box'>
                         <% if(data[i].brand_logo === null) { %>
                             <img class="image" src='/images/medicines/<%=data[i].medicine_name%>.png' alt="Medicine logo 2  ">
@@ -23,8 +24,9 @@
                 </a>
             <%}%>
         </div>
+        <!-- Main -->
     </div>
-  </section>
+</section>
 
-  <%- include('../includes/foot.ejs') %>
+<%- include('../includes/foot.ejs') %>
 
