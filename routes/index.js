@@ -8,9 +8,9 @@ const OptionList = require("../controllers/elibrary/OptionList");
 const UploadContent = require("../controllers/elibrary/UploadContent");
 const UploadMedicine = require("../controllers/elibrary/UploadMedicine");
 
-const AdminDownload = require("../controllers/elibrary/AdminDownload");
 
 const UserAccess = require("../controllers/login_access/UserAccess");
+const DownloadReports = require("../controllers/elibrary/DownloadReports");
 
 const QuizList = require("../controllers/quiz/QuizList");
 const QuestionList = require("../controllers/quiz/QuestionList");
@@ -166,7 +166,21 @@ router.get("/user_access", async function (req, res, next) {
 
 router.post("/user_access/update", UserAccess.update_user_access);
 // User Access
+//
+//
+//
+// Reports
+router.get("/reports", function (req, res) {
+  if (isAdminLogin(req, res)) {
+    res.render("reports", { title: "Reports" });
+  }
+});
 
+router.post("/reports/download", DownloadReports.download);
+// Reports
+//
+//
+//
 // Quiz Result
 // router.get("/quiz_result", function (req, res) {
 //   if (isAdminLogin(req, res)) {

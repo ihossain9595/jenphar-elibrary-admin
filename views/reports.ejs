@@ -1,0 +1,31 @@
+<%- include('includes/head.ejs') %>
+
+<div id="content_box">
+  <div class="main_box">
+    <!-- Intro -->
+    <div id="title_box_quiz_primary">
+      <h1 class="title"><%= title %></h1>
+      <hr class="line" />
+    </div>
+    <!-- Intro -->
+    
+    <!-- Reports -->
+    <div id="content_box_reports">
+      <form class="download_reports" action="/reports/download" method="POST">
+        <label class="label" for="start">
+          Start Date:
+          <input type="date" class="input_text input-sm form-control" name="dateStart" id="start" placeholder="Start" />
+        </label>
+        
+        <label class="label" for="end">
+          End Date:
+          <input type="date" class="input_text input-sm form-control" name="dateEnd" id="end" placeholder="End" />
+        </label>
+        <button class="button_submit" type="submit">Download</button>
+      </form>
+    </div>
+    <!-- Reports -->
+  </div>
+</div>
+
+<%- include('includes/foot.ejs') %>
