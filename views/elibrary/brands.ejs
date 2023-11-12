@@ -1,17 +1,15 @@
-<!-- * HEAD * -->
-<%- include('includes/admin_layout/head.ejs') %>
-<!-- * HEAD * -->
+<%- include('../includes/head.ejs') %>
 
-<body>
-  <!-- * NAVBAR - START * -->
-  <%- include('includes/admin_layout/navbar_start.ejs') %>
-  <!-- * NAVBAR - START * -->
-  
-  <!-- ! MAIN ! -->
-  <section class='main_box'>
-    <div class='content_box'>
-        <h1 class='title'><%= title %></h1>
-        <div id='info_boxes'>
+<section id='content_box'>
+    <div class='main_box'>
+      <!-- Intro -->
+      <div id="title_box_elibrary_primary">
+        <h1 class="title"><%= title %></h1>
+        <hr class="line">
+      </div>
+      <!-- Intro -->
+
+        <div id='content_box_brands'>
             <%for(let i=0;i<data.length;i++){%>
                 <a class='med_info_box' href="/admin/e-library/option?id=<%=data[i].id%>&medicine_name=<%=data[i].medicine_name%>">
                     <div class='image_box'>
@@ -27,14 +25,6 @@
         </div>
     </div>
   </section>
-  <!-- ! MAIN ! -->
 
-  <!-- * NAVBAR - END * -->
-  <%- include('includes/admin_layout/navbar_end.ejs') %>
-  <!-- * NAVBAR - END * -->
-</body>
-
-<!-- * FOOT * -->
-<%- include('includes/admin_layout/foot.ejs') %>
-<!-- * FOOT * -->
+  <%- include('../includes/foot.ejs') %>
 

@@ -4,7 +4,7 @@ const Sequelize = require("sequelize");
 module.exports = (sequelize) => {
   const attributes = {
     id: {
-      type: DataTypes.INTEGER(10).UNSIGNED,
+      type: DataTypes.INTEGER(11).UNSIGNED,
       allowNull: false,
       defaultValue: null,
       primaryKey: true,

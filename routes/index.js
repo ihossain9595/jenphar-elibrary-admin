@@ -2,11 +2,13 @@ var express = require("express");
 var router = express.Router();
 
 const Login = require("../controllers/login/Login");
-const AdminMedicineUpload = require("../controllers/admin/AdminMedicineUpload");
-const AdminCategory = require("../controllers/admin/AdminCategory");
-const AdminDownload = require("../controllers/admin/AdminDownload");
-const AdminOption = require("../controllers/admin/AdminOption");
-const AdminUpload = require("../controllers/admin/AdminUpload");
+const AdminMedicineUpload = require("../controllers/elibrary/AdminMedicineUpload");
+
+const BrandList = require("../controllers/elibrary/BrandList");
+
+const AdminDownload = require("../controllers/elibrary/AdminDownload");
+const AdminOption = require("../controllers/elibrary/AdminOption");
+const AdminUpload = require("../controllers/elibrary/AdminUpload");
 
 const UserAccess = require("../controllers/login_access/UserAccess");
 
@@ -59,6 +61,22 @@ router.get("/dashboard", function (req, res) {
   }
 });
 // Dashboard
+//
+//
+//
+// E-Library - Category - 
+router.get("/elibrary", function (req, res) {
+  if (isAdminLogin(req, res)) {
+    res.render("elibrary/elibrary", { title: "E-Library" });
+  }
+});
+
+router.get("/elibrary/brands", function (req, res, next) {
+  if (isAdminLogin(req, res)) {
+    BrandList.get_brand_list(req, res, next);
+  }
+});
+// E-Library - Category - 
 //
 //
 //
@@ -145,17 +163,6 @@ router.post("/user_access/update", UserAccess.update_user_access);
 
 // router.post("/admin/download/reports", AdminDownload.download);
 
-// router.get("/admin/e-library", function (req, res) {
-//   if (isAdminLogin(req, res)) {
-//     res.render("admin_e_library", { title: "E-Library" });
-//   }
-// });
-
-// router.get("/admin/e-library/category", function (req, res, next) {
-//   if (isAdminLogin(req, res)) {
-//     AdminCategory._view(req, res, next);
-//   }
-// });
 
 // router.get("/admin/add-medicine", function (req, res) {
 //   if (isAdminLogin(req, res)) {

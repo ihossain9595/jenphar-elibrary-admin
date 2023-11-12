@@ -1,11 +1,37 @@
+const { DataTypes } = require("sequelize");
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
   const QuizListModel = sequelize.define(
     "QuizListModel",
     {
-      name: Sequelize.STRING(255),
-      time_duration: Sequelize.INTEGER,
+      id: {
+        type: DataTypes.INTEGER(11).UNSIGNED,
+        allowNull: false,
+        defaultValue: null,
+        primaryKey: true,
+        autoIncrement: true,
+        comment: null,
+        field: "id",
+      },
+      name: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "name",
+      },
+      time_duration: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "time_duration",
+      },
       category: {
         type: Sequelize.ENUM,
         values: ["Hematology", "Oncology", "Virology", "Combined"],
