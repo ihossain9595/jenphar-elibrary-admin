@@ -1,10 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "radiant@123",
-    "database": "jenphar_hub",
-    "host": "116.68.200.97",
-    "port": "60906",
+    "password": "Jenphar@#$123",
+    "database": "jenphar_elibrary",
+    "host": "119.148.39.150",
+    "port": "3306",
     "dialect": "mysql",
     "timezone": "Asia/Dhaka"
   },
@@ -17,10 +17,10 @@
   },
   "production": {
     "username": "root",
-    "password": "radiant@123",
-    "database": "jenphar_hub",
-    "host": "116.68.200.97",
-    "port": "60906",
+    "password": "Jenphar@#$123",
+    "database": "jenphar_elibrary",
+    "host": "119.148.39.150",
+    "port": "3306",
     "dialect": "mysql",
     "timezone": "Asia/Dhaka"
   }
