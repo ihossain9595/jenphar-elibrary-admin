@@ -5,8 +5,7 @@
     "database": "jenphar_elibrary",
     "host": "119.148.39.150",
     "port": "3306",
-    "dialect": "mysql",
-    "timezone": "Asia/Dhaka"
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
@@ -21,7 +20,6 @@
     "database": "jenphar_elibrary",
     "host": "119.148.39.150",
     "port": "3306",
-    "dialect": "mysql",
-    "timezone": "Asia/Dhaka"
+    "dialect": "mysql"
   }
 }

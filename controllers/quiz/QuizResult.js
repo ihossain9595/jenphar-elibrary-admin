@@ -21,15 +21,15 @@ exports.download_result = async (req, res, next) => {
     { header: "Sl", key: "sl", width: 5 },
     { header: "Employee Id", key: "work_area_t", width: 10 },
     { header: "Name", key: "name", width: 20 },
-    { header: "Quiz Name", key: "quiz_name", width: 10 },
-    { header: "Question", key: "question", width: 10 },
-    { header: "Answer", key: "answer", width: 10 },
-    { header: "Answer by Employee", key: "answer_employee", width: 10 },
-    { header: "Mark", key: "mark", width: 10 },
-    { header: "Option 1", key: "option_1", width: 10 },
-    { header: "Option 2", key: "option_2", width: 10 },
-    { header: "Option 3", key: "option_3", width: 10 },
-    { header: "Option 4", key: "option_4", width: 10 },
+    { header: "Quiz Name", key: "quiz_name", width: 20 },
+    { header: "Question", key: "question", width: 50 },
+    { header: "Answer", key: "answer", width: 5 },
+    { header: "Answer by Employee", key: "answer_employee", width: 5 },
+    { header: "Mark", key: "mark", width: 5 },
+    { header: "Option 1", key: "option_1", width: 15 },
+    { header: "Option 2", key: "option_2", width: 15 },
+    { header: "Option 3", key: "option_3", width: 15 },
+    { header: "Option 4", key: "option_4", width: 15 },
     { header: "Total Mark", key: "total_mark", width: 10 },
   ];
 
@@ -46,33 +46,42 @@ exports.download_result = async (req, res, next) => {
     const currentMark = markCount.get(quiz.work_area_t) || 0;
     markCount.set(quiz.work_area_t, currentMark + isCorrect);
 
-    worksheet.addRow({ sl: i + 1, work_area_t: quiz.work_area_t, name: quiz.name, quiz_name: quiz.quiz_name, question: quiz.question, answer: quiz.answer, answer_employee: quiz.user_answer, mark: isCorrect, option_1: quiz.option_1, option_2: quiz.option_2, option_3: quiz.option_3, option_4: quiz.option_4,  total_mark: currentMark + isCorrect, });
+    worksheet.addRow({ sl: 1, work_area_t: quiz.work_area_t, name: quiz.name, quiz_name: quiz.quiz_name, question: quiz.question, answer: quiz.answer, answer_employee: quiz.user_answer, mark: isCorrect, option_1: quiz.option_1, option_2: quiz.option_2, option_3: quiz.option_3, option_4: quiz.option_4, total_mark: currentMark + isCorrect });
   });
 
+  let serial = 0;
   let lastEmployeeId = null;
   let lastEmployeeIdRowIndex = null;
 
-worksheet.eachRow((row, rowNumber) => {
-  const employeeId = row.getCell("work_area_t").value;
+  worksheet.eachRow((row, rowNumber) => {
+    const employeeId = row.getCell("work_area_t").value;
 
-  if (employeeId !== lastEmployeeId) {
-    if (lastEmployeeIdRowIndex !== null && lastEmployeeIdRowIndex !== rowNumber - 1) {
-      const totalMarkFormula = `SUM(M${lastEmployeeIdRowIndex}:M${rowNumber - 1})`;
-      worksheet.mergeCells(`C${lastEmployeeIdRowIndex}:C${rowNumber - 1}`);
-      worksheet.mergeCells(`M${lastEmployeeIdRowIndex}:M${rowNumber - 1}`);
-      worksheet.getCell(`M${lastEmployeeIdRowIndex}`).value = { formula: totalMarkFormula, result: markCount.get(lastEmployeeId) };
+    if (employeeId !== lastEmployeeId) {
+      if (lastEmployeeIdRowIndex !== null && lastEmployeeIdRowIndex !== rowNumber - 1) {
+        const totalMarkFormula = `SUM(M${lastEmployeeIdRowIndex}:M${rowNumber - 1})`;
+        worksheet.mergeCells(`A${lastEmployeeIdRowIndex}:A${rowNumber - 1}`);
+        worksheet.mergeCells(`B${lastEmployeeIdRowIndex}:B${rowNumber - 1}`);
+        worksheet.mergeCells(`C${lastEmployeeIdRowIndex}:C${rowNumber - 1}`);
+        worksheet.mergeCells(`D${lastEmployeeIdRowIndex}:D${rowNumber - 1}`);
+        worksheet.mergeCells(`M${lastEmployeeIdRowIndex}:M${rowNumber - 1}`);
+        worksheet.getCell(`M${lastEmployeeIdRowIndex}`).value = { formula: totalMarkFormula, result: markCount.get(lastEmployeeId) };
+        worksheet.getCell(`A${lastEmployeeIdRowIndex}`).value = ++serial;
+      }
+      lastEmployeeId = employeeId;
+      lastEmployeeIdRowIndex = rowNumber;
     }
-    lastEmployeeId = employeeId;
-    lastEmployeeIdRowIndex = rowNumber;
-  }
-});
+  });
 
-if (lastEmployeeIdRowIndex !== null) {
-  const totalMarkFormula = `SUM(M${lastEmployeeIdRowIndex}:M${worksheet.rowCount})`;
-  worksheet.mergeCells(`C${lastEmployeeIdRowIndex}:C${worksheet.rowCount}`);
-  worksheet.mergeCells(`M${lastEmployeeIdRowIndex}:M${worksheet.rowCount}`);
-  worksheet.getCell(`M${lastEmployeeIdRowIndex}`).value = { formula: totalMarkFormula, result: markCount.get(lastEmployeeId) };
-}
+  if (lastEmployeeIdRowIndex !== null) {
+    const totalMarkFormula = `SUM(M${lastEmployeeIdRowIndex}:M${worksheet.rowCount})`;
+    worksheet.mergeCells(`A${lastEmployeeIdRowIndex}:A${worksheet.rowCount}`);
+    worksheet.mergeCells(`B${lastEmployeeIdRowIndex}:B${worksheet.rowCount}`);
+    worksheet.mergeCells(`C${lastEmployeeIdRowIndex}:C${worksheet.rowCount}`);
+    worksheet.mergeCells(`D${lastEmployeeIdRowIndex}:D${worksheet.rowCount}`);
+    worksheet.mergeCells(`M${lastEmployeeIdRowIndex}:M${worksheet.rowCount}`);
+    worksheet.getCell(`M${lastEmployeeIdRowIndex}`).value = { formula: totalMarkFormula, result: markCount.get(lastEmployeeId) };
+    worksheet.getCell(`A${lastEmployeeIdRowIndex}`).value = ++serial;
+  }
 
   res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
   res.setHeader("Content-Disposition", `attachment; filename=jenphar-quiz-result.xlsx`);
