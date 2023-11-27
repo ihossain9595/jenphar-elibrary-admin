@@ -45,6 +45,9 @@
   </div>
   
   <script>
+    // var moment = require('moment');
+    // moment().format();
+
     const options = {
       year: "numeric",
       month: "long",
@@ -55,8 +58,8 @@
     };
   
     function changeDateTimeFormat(oldDateTime) {
-      const dateTime = new Date(oldDateTime);
-      const formattedDateTime = dateTime.toLocaleDateString("en-US", options);
+      console.log("PASS -> ", oldDateTime);
+      const formattedDateTime = moment(oldDateTime).format('MMMM Do, YYYY h:mm:ss a');
       return formattedDateTime;
     }
   
@@ -81,8 +84,8 @@
             } else {
               $("td:eq(5)", row).html('<span class="badge badge-secondary">Unpublished</span>');
             }
-            $("td:eq(3)", row).html("<span>" + changeDateTimeFormat(data.start_time) + "</span>");
-            $("td:eq(4)", row).html("<span>" + changeDateTimeFormat(data.end_time) + "</span>");
+            $("td:eq(3)", row).html("<span>" + moment(data.start_time).utcOffset(0).format('h:mm A - Do MMM, YYYY') + "</span>");
+            $("td:eq(4)", row).html("<span>" + moment(data.end_time).utcOffset(0).format('h:mm A - Do MMM, YYYY') + "</span>");
           },
           columns: [{ data: "name" }, { data: "time_duration" }, { data: "category" }, { data: "start_time" }, { data: "end_time" }, { data: "status" }, { data: "action" }],
         });
