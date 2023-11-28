@@ -53,7 +53,7 @@
 
             <label class="label" for="end_time">
               Quiz End
-              <input class="input_select" id="end_time" name="end_time" value="<%= end_time %>" type="datetime-local" required />
+              <input class="input_select" id="end_time" name="end_time" type="datetime-local" required />
             </label>
           </div>
 
@@ -72,23 +72,12 @@
     </div>
   </div>
 
-  <script>
-    var start_time = '<%= start_time %>';
-    var end_time = '<%= end_time %>';
+  <script>  
+    let start_time =  moment('<%= start_time %>').utcOffset(0).format("YYYY-MM-DDTHH:mm");
+    let end_time = moment('<%= end_time %>').utcOffset(0).format("YYYY-MM-DDTHH:mm");
 
-    var startDate = new Date(start_time);
-    var endDate = new Date(end_time);
-
-    var gmtOffset = 360;
-
-    startDate.setMinutes(startDate.getMinutes() + gmtOffset);
-    endDate.setMinutes(endDate.getMinutes() + gmtOffset);
-
-    var formattedStartDate = startDate.toISOString().slice(0, 16);
-    var formattedEndDate = endDate.toISOString().slice(0, 16);
-
-    document.getElementById('start_time').value = formattedStartDate;
-    document.getElementById('end_time').value = formattedEndDate;
-    </script>
+    document.getElementById('start_time').value = start_time;
+    document.getElementById('end_time').value = end_time;
+  </script>
 
 <%- include('../includes/foot.ejs') %>
