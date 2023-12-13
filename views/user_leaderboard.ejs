@@ -1,0 +1,34 @@
+<%- include('includes/head.ejs') %>
+
+<div id="content_box">
+  <div class="main_box">
+    <!-- Intro -->
+    <div id="title_box_quiz_primary">
+      <h1 class="title"><%= title %></h1>
+      <hr class="line" />
+    </div>
+    <!-- Intro -->
+
+    <div id="content_box_quiz_add">
+      <!-- ERROR -->
+      <div id="error_half">
+        <% if (messages.error) { %>
+        <div class="message_error">Error! <%- messages.error %></div>
+        <% } %> <% if (messages.success) { %>
+        <div class="message_success">Success! <%- messages.success %></div>
+        <% } %>
+      </div>
+      <!-- ERROR -->
+
+      <!-- Form -->
+        <form action="/user_leaderboard/upload_excel" class="add_quiz" method="post" enctype="multipart/form-data">
+          <input type="file" name="file" accept=".xlsx">
+
+        <button class="button_submit" type="submit">Upload</button>
+      </form>
+      <!-- Form -->
+    </div>
+  </div>
+</div>
+
+<%- include('includes/foot.ejs') %>

@@ -15,6 +15,7 @@ const DownloadReports = require("../controllers/elibrary/DownloadReports");
 const QuizList = require("../controllers/quiz/QuizList");
 const QuestionList = require("../controllers/quiz/QuestionList");
 const QuizResult = require("../controllers/quiz/QuizResult");
+const UserLeaderboard = require("../controllers/UserLeaderboard");
 
 const { UserLogModel, UserLoginStatus } = require("../models");
 const moment = require("moment/moment");
@@ -189,5 +190,12 @@ router.get("/quiz_result", function (req, res, next) {
 
 router.post("/quiz_result/download", QuizResult.download_result);
 // Quiz Result
+
+router.get("/user_leaderboard", function (req, res, next) {
+  if (isAdminLogin(req, res, next)) {
+    UserLeaderboard.user_leaderboard(req, res, next);
+  }
+});
+router.post('/user_leaderboard/upload_excel', UserLeaderboard.UploadExcel);
 
 module.exports = router;
