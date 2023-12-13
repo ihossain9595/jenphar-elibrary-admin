@@ -21,8 +21,11 @@
       <!-- ERROR -->
 
       <!-- Form -->
-        <form action="/user_leaderboard/upload_excel" class="add_quiz" method="post" enctype="multipart/form-data">
-          <input type="file" name="file" accept=".xlsx">
+      <form action="/user_leaderboard/upload_excel" class="add_quiz" method="post" enctype="multipart/form-data">
+        <label class="label" for="name">
+          Upload Excel file
+          <input class="input_text" type="file" name="file" accept=".xlsx" />
+        </label>
 
         <button class="button_submit" type="submit">Upload</button>
       </form>
