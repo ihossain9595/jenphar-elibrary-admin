@@ -9,16 +9,22 @@ exports.download = async (req, res, next) => {
   const start = req.body.dateStart;
   const end = req.body.dateEnd;
 
-  const formatStartDate = moment(start, "DD-MM-YYYY").format("YYYY-MM-DD");
-  const formatEndDate = moment(end, "DD-MM-YYYY").format("YYYY-MM-DD");
+  console.log("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
+  console.log("+_+_+_+_+_+_+_+_+_+");
+  console.log("+_+_+_+_+");
+  console.log(`START: ${start}`);
+  console.log(`END: ${end}`);
+  console.log("+_+_+_+_+");
+  console.log("+_+_+_+_+_+_+_+_+_+");
+  console.log("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
 
-  const user_log = await sequelize.query(`SELECT ul.*, uli.name FROM user_log ul INNER JOIN user_list uli ON ul.user_id=uli.work_area_t WHERE DATE(ul.log_time) BETWEEN '${formatStartDate}' AND '${formatEndDate}' AND ul.log_type != 'login';`, { type: QueryTypes.SELECT });
+  const user_log = await sequelize.query(`SELECT ul.*, uli.name FROM user_log ul INNER JOIN user_list uli ON ul.user_id=uli.work_area_t WHERE DATE(ul.log_time) BETWEEN '${start}' AND '${end}' AND ul.log_type NOT IN ('login', 'logout');`, { type: QueryTypes.SELECT });
 
   const workbook = new excel.Workbook();
   const worksheet = workbook.addWorksheet("Users");
 
   worksheet.columns = [
-    { header: "SL", key: "sl", width: 5 },
+    { header: "SL", key: "sl", width: 10 },
     { header: "Name", key: "name", width: 20 },
     { header: "Employee Id", key: "user_id", width: 15 },
     { header: "Date", key: "date", width: 15 },
@@ -28,12 +34,11 @@ exports.download = async (req, res, next) => {
 
   user_log.forEach((user, i) => {
     const dateTimeString = user.log_time;
-    const stayTimeMinuties = user.stay_time / 60000;
-    const dateTime = new Date(dateTimeString);
 
-    const formattedDateString = dateTime.toLocaleDateString();
-    const formattedTimeString = dateTime.toLocaleTimeString();
-
+    const stayTimeMinuties = (user.stay_time / 60000).toFixed(2);
+    const formattedDateString = moment(dateTimeString).utcOffset(0).format('DD-MM-YYYY');
+    const formattedTimeString = moment(dateTimeString).utcOffset(0).format('hh:mm:ss A');
+    
     worksheet.addRow({ sl: i + 1, date: formattedDateString, time: formattedTimeString, duration: stayTimeMinuties, ...user });
   });
 

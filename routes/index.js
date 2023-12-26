@@ -10,7 +10,7 @@ const UploadMedicine = require("../controllers/elibrary/UploadMedicine");
 
 
 const UserAccess = require("../controllers/login_access/UserAccess");
-const DownloadReports = require("../controllers/elibrary/DownloadReports");
+const ReportDownload = require("../controllers/elibrary/ReportDownload");
 
 const QuizList = require("../controllers/quiz/QuizList");
 const QuestionList = require("../controllers/quiz/QuestionList");
@@ -170,13 +170,13 @@ router.post("/user_access/update", UserAccess.update_user_access);
 //
 //
 // Reports
-router.get("/reports", function (req, res) {
-  if (isAdminLogin(req, res)) {
+router.get("/reports", function (req, res, next) {
+  if (isAdminLogin(req, res, next)) {
     res.render("reports", { title: "Reports" });
   }
 });
 
-router.post("/reports/download", DownloadReports.download);
+router.post("/reports/download", ReportDownload.download);
 // Reports
 //
 //
