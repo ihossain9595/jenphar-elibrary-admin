@@ -4,15 +4,14 @@ const excel = require("exceljs");
 const moment = require("moment/moment");
 
 exports.quiz_list = async (req, res) => {
-  const quiz_data = await sequelize.query("SELECT * FROM quiz_list;", { type: QueryTypes.SELECT });
-
+  const quiz_data = await sequelize.query("SELECT * FROM quiz_list ORDER BY id DESC;", { type: QueryTypes.SELECT });
   res.render("quiz_result", { title: "Quiz Result", data: quiz_data });
 };
 
 exports.download_result = async (req, res, next) => {
   const quiz_id = req.body.quiz_id;
 
-  const quiz_log = await sequelize.query(`SELECT ul.work_area_t, ul.name, qul.quiz_id, qzl.name AS quiz_name, al.question_id, qul.question, qul.answer, al.user_answer, qul.option_1, qul.option_2, qul.option_3, qul.option_4 FROM user_list ul INNER JOIN answer_list al ON ul.work_area_t = al.user_id INNER JOIN question_list qul ON al.question_id = qul.id INNER JOIN quiz_list qzl ON qul.quiz_id = qzl.id WHERE qul.quiz_id = ${quiz_id};`, { type: QueryTypes.SELECT });
+  const quiz_log = await sequelize.query(`SELECT ul.work_area_t, ul.name, qul.quiz_id, qzl.name AS quiz_name, al.question_id, qul.question, qul.answer, al.user_answer, qul.option_1, qul.option_2, qul.option_3, qul.option_4 FROM user_list ul INNER JOIN answer_list al ON ul.work_area_t = al.user_id INNER JOIN question_list qul ON al.question_id = qul.id INNER JOIN quiz_list qzl ON qul.quiz_id = qzl.id WHERE qul.quiz_id = ${quiz_id} ORDER BY ul.work_area_t DESC;`, { type: QueryTypes.SELECT });
 
   const workbook = new excel.Workbook();
   const worksheet = workbook.addWorksheet("Users");

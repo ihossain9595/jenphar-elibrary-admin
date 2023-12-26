@@ -183,7 +183,7 @@ router.post("/reports/download", ReportDownload.download);
 //
 // Quiz Result
 router.get("/quiz_result", function (req, res, next) {
-  if (isAdminLogin(req, res)) {
+  if (isAdminLogin(req, res, next)) {
     QuizResult.quiz_list(req, res, next);
   }
 });
