@@ -53,6 +53,7 @@ exports.post_add_quiz = async (req, res, next) => {
     let insert_data = {
       name: req.body.name,
       time_duration: req.body.time_duration,
+      total_points: req.body.total_points,
       category: req.body.category,
       start_time: req.body.start_time,
       end_time: req.body.end_time,
@@ -79,6 +80,7 @@ exports.get_edit_quiz = async (req, res, next) => {
     id: result.id,
     name: result.name,
     time_duration: result.time_duration,
+    total_points: result.total_points,
     category: result.category,
     start_time: result.start_time,
     end_time: result.end_time,
@@ -99,6 +101,7 @@ exports.post_edit_quiz = async (req, res, next) => {
     let update_data = {
       name: req.body.name,
       time_duration: req.body.time_duration,
+      total_points: req.body.total_points,
       category: req.body.category,
       start_time: req.body.start_time,
       end_time: req.body.end_time,

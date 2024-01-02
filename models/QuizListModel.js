@@ -32,6 +32,15 @@ module.exports = (sequelize) => {
         comment: null,
         field: "time_duration",
       },
+      total_points: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "total_points",
+      },
       category: {
         type: Sequelize.ENUM,
         values: ["Hematology", "Oncology", "Virology", "Combined"],
