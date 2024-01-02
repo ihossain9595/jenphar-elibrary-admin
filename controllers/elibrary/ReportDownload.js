@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+// const router = express.Router();
 const excel = require("exceljs");
 const { sequelize } = require("../../models");
 const { QueryTypes } = require("sequelize");
@@ -9,14 +9,14 @@ exports.download = async (req, res, next) => {
   const start = req.body.dateStart;
   const end = req.body.dateEnd;
 
-  console.log("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
-  console.log("+_+_+_+_+_+_+_+_+_+");
-  console.log("+_+_+_+_+");
-  console.log(`START: ${start}`);
-  console.log(`END: ${end}`);
-  console.log("+_+_+_+_+");
-  console.log("+_+_+_+_+_+_+_+_+_+");
-  console.log("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
+  // console.log("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
+  // console.log("+_+_+_+_+_+_+_+_+_+");
+  // console.log("+_+_+_+_+");
+  // console.log(`START: ${start}`);
+  // console.log(`END: ${end}`);
+  // console.log("+_+_+_+_+");
+  // console.log("+_+_+_+_+_+_+_+_+_+");
+  // console.log("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
 
   const user_log = await sequelize.query(`SELECT ul.*, uli.name FROM user_log ul INNER JOIN user_list uli ON ul.user_id=uli.work_area_t WHERE DATE(ul.log_time) BETWEEN '${start}' AND '${end}' AND ul.log_type NOT IN ('login', 'logout');`, { type: QueryTypes.SELECT });
 
@@ -35,7 +35,7 @@ exports.download = async (req, res, next) => {
   user_log.forEach((user, i) => {
     const dateTimeString = user.log_time;
 
-    const stayTimeMinuties = (user.stay_time / 60000).toFixed(2);
+    const stayTimeMinuties = Number((user.stay_time / 60000).toFixed(2));
     const formattedDateString = moment(dateTimeString).utcOffset(0).format('DD-MM-YYYY');
     const formattedTimeString = moment(dateTimeString).utcOffset(0).format('hh:mm:ss A');
     
