@@ -1,5 +1,3 @@
-const express = require("express");
-// const router = express.Router();
 const excel = require("exceljs");
 const { sequelize } = require("../../models");
 const { QueryTypes } = require("sequelize");
