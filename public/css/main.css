@@ -257,6 +257,80 @@
 >
 >
 */
+/* POSTER */
+#content_box_poster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .upload_poster {
+    background-color: var(--blue-primary-1);
+    border: 1px solid var(--blue-primary-1);
+    width: 50%;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+
+    .show_poster_box {
+      background-color: var(--white);
+      border-radius: 0.8rem;
+      padding: 1.2rem;
+      margin-bottom: 1.2rem;
+
+      .show_image {
+        display: block;
+        margin: 0 auto;
+        width: 15rem;
+      }
+    }
+
+    .label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      color: var(--blue-secondary);
+    }
+
+    .input_text {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--blue-primary-1);
+      background-color: var(--white);
+      border-radius: 0.8rem;
+      padding: 1.2rem;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-top: 0.4rem;
+    }
+
+    .button_submit {
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1;
+      cursor: pointer;
+      border: none;
+      border-radius: 0.8rem;
+      padding: 1.2rem 3.2rem;
+      background-color: var(--blue-secondary);
+      border: 1px solid var(--blue-secondary);
+      color: var(--white);
+      transition: 0.2s;
+
+      &:hover {
+        background-color: var(--blue-secondary-hover);
+      }
+    }
+  }
+}
+/* POSTER */
+/*
+>
+>
+>
+*/
 /* RESULTS */
 #content_box_result {
   display: flex;

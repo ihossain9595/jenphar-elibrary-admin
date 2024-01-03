@@ -1,0 +1,52 @@
+<%- include('includes/head.ejs') %>
+
+<div id="content_box">
+  <div class="main_box">
+    <div id="title_box_quiz_primary">
+      <h1 class="title"><%= title %></h1>
+      <hr class="line" />
+    </div>
+
+    <img src="" alt="">
+
+    <!-- ERROR -->
+    <div id="error_full">
+      <% if (messages.error) { %>
+      <div class="message_error">Error! <%- messages.error %></div>
+      <% } %> <% if (messages.success) { %>
+      <div class="message_success">Success! <%- messages.success %></div>
+      <% } %>
+    </div>
+    <!-- ERROR -->
+    
+    <div id="content_box_poster">
+      <form id="addmedicine" class="upload_poster" action="/poster/upload" method="POST" enctype="multipart/form-data">
+        <div class="show_poster_box">
+          <img class="show_image" src="/images/posters/<%= poster_image %>" alt="Poster">
+        </div>
+
+        <label class="label" for="poster_image">
+          Poster:
+          <input class="input_text" type="file" name="poster_image" id="poster_image" accept="image/*"/>
+        </label>
+
+        <label class="label" for="poster_link">
+          Link:
+          <input class="input_text" name="poster_link" type="text" id="medicine_name" placeholder="Poster Link" value="<%= poster_link%>" />
+        </label>
+
+        <label class="label" for="poster_status">
+          Status:
+          <select class="input_text" id="poster_status" name="poster_status" placeholder="Status">
+            <option value="Published" <%= poster_status === "Published" ? "selected" : "" %>>Published</option>
+            <option value="Unpublished" <%= poster_status === "Unpublished" ? "selected" : "" %>>Unpublished</option>
+          </select>
+        </label>
+
+        <button class="button_submit" type="submit">Upload</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('includes/foot.ejs') %>

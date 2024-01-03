@@ -34,7 +34,7 @@ exports.upload = [
 
       const errorHandler = (err) => {
         req.flash("error", err);
-        res.redirect("/admin/add_medicine");
+        res.redirect("/elibrary/add_medicine");
       };
 
       data.push({

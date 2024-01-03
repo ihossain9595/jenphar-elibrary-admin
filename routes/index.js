@@ -11,6 +11,7 @@ const UploadMedicine = require("../controllers/elibrary/UploadMedicine");
 
 const UserAccess = require("../controllers/login_access/UserAccess");
 const ReportDownload = require("../controllers/elibrary/ReportDownload");
+const Poster = require("../controllers/poster/Poster");
 
 const QuizList = require("../controllers/quiz/QuizList");
 const QuestionList = require("../controllers/quiz/QuestionList");
@@ -178,6 +179,18 @@ router.get("/reports", function (req, res, next) {
 
 router.post("/reports/download", ReportDownload.download);
 // Reports
+//
+//
+//
+// Poster
+router.get("/poster", function (req, res, next) {
+  if (isAdminLogin(req, res, next)) {
+    Poster.get_poster(req, res, next);
+  }
+});
+
+router.post("/poster/upload", Poster.post_poster);
+// Poster
 //
 //
 //
